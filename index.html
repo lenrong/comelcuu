@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spreadsheet Filter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 20px;
+      color: #111827;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    h2 {
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #1f2937;
+    }
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    select {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    select:hover {
+      border-color: #6366f1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    thead {
+      background: #f3f4f6;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    tr:hover {
+      background: #f9fafb;
+    }
+    th {
+      font-weight: 600;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📊 Data Spreadsheet</h2>
+    <div>
+      <label for="kolomFilter">Pilih Kolom:</label>
+      <select id="kolomFilter" onchange="renderTable()"></select>
+    </div>
+    <table id="tabel">
+      <thead>
+        <tr>
+          <th>NMSKPD</th>
+          <th id="judulKolom"></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQclL6uES4NQ2BcIJ02L-yU4TQHuCicwFgEctD76Emj6PGtv2fY2kdgTrlB9izqNs4swIsIX7w7Z06c/pub?output=csv';
+
+    let data = [];
+    let headers = [];
+
+    fetch(csvUrl)
+      .then(res => res.ok ? res.text() : Promise.reject('Gagal memuat data'))
+      .then(text => {
+        const rows = text.trim().split('\n').map(r => r.split(',').map(c => c.trim()));
+        headers = rows[0].slice(1);
+        data = rows.slice(1).map(r => {
+          return { NMSKPD: r[0], ...headers.reduce((acc, h, i) => (acc[h] = r[i+1], acc), {}) };
+        });
+        const select = document.getElementById('kolomFilter');
+        headers.forEach(h => {
+          const opt = document.createElement('option');
+          opt.value = h;
+          opt.textContent = h;
+          select.append(opt);
+        });
+        select.value = headers[0];
+        renderTable();
+      })
+      .catch(err => console.error(err));
+
+    function renderTable() {
+      const col = document.getElementById('kolomFilter').value;
+      document.getElementById('judulKolom').textContent = col;
+      const tbody = document.querySelector('#tabel tbody');
+      tbody.innerHTML = '';
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${row.NMSKPD}</td><td>${row[col]}</td>`;
+        tbody.append(tr);
+      });
+    }
+  </script>
+</body>
+</html>
