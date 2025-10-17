@@ -10,10 +10,10 @@
 
   <style>
     :root{
-      --bg1: #fff5f8;
-      --bg2: #ffeef6;
-      --accent: #d63384;
-      --accent-dark: #b42d70;
+      --bg1:#fff5f8;
+      --bg2:#ffeef6;
+      --accent:#d63384;
+      --accent-dark:#b42d70;
       --muted:#6b6b6b;
     }
 
@@ -51,6 +51,8 @@
       cursor:pointer;
       font-size:1rem;
       transition:opacity .2s;
+      text-decoration:none;
+      display:inline-block;
     }
     .btn:hover{opacity:.9}
     .poem{display:none;opacity:0;transition:opacity .6s ease}
@@ -58,8 +60,6 @@
     .poem h2{color:#5b2b4a}
     .poem p{text-align:left;line-height:1.7;color:#444}
     .note{font-size:.9rem;color:#777;margin-top:10px}
-
-    /* hearts animation */
     .hearts{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
     .heart{
       position:absolute;width:18px;height:18px;
@@ -73,7 +73,6 @@
       10%{opacity:1}
       100%{transform:translateY(-20vh) rotate(20deg);opacity:0}
     }
-
     @media(max-width:420px){
       .container{padding:18px}
       .btn{width:100%}
@@ -109,6 +108,14 @@
         <strong>merindu, diam-diam.</strong>
       </p>
       <p class="note"><em>Dari seseorang yang masih merindukanmu diam-diam 💌</em></p>
+
+      <br>
+      <p style="margin-top:24px;color:#5b2b4a;font-weight:500;">
+        Kalau kamu juga rindu... klik tombol di bawah ini 💖
+      </p>
+      <a href="https://wa.me/6285756047187?text=hay,%20miss%20you%20to%20💌" target="_blank" class="btn">
+        Klik tombol di bawah ini
+      </a>
     </div>
   </div>
 
