@@ -1,115 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PROYEKSI PPPK SAMPAI DESEMBER 2025</title>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tailwindcss-jit-cdn"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Halo Comelku — Pesan Rindu</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #fff5f8;
+      --bg2: #ffeef6;
+      --accent: #d63384;
+      --accent-dark: #b42d70;
+      --muted:#6b6b6b;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",sans-serif;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      text-align:center;
+      overflow:hidden;
+    }
+    .container{
+      max-width:720px;
+      background:rgba(255,255,255,0.75);
+      backdrop-filter:blur(6px);
+      border-radius:16px;
+      padding:28px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      position:relative;
+    }
+    h1{color:var(--accent);margin-bottom:8px}
+    .subtitle{color:var(--muted);margin-bottom:18px}
+    .btn{
+      background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+      color:#fff;
+      border:none;
+      padding:12px 28px;
+      border-radius:999px;
+      font-weight:600;
+      cursor:pointer;
+      font-size:1rem;
+      transition:opacity .2s;
+    }
+    .btn:hover{opacity:.9}
+    .poem{display:none;opacity:0;transition:opacity .6s ease}
+    .poem.visible{display:block;opacity:1}
+    .poem h2{color:#5b2b4a}
+    .poem p{text-align:left;line-height:1.7;color:#444}
+    .note{font-size:.9rem;color:#777;margin-top:10px}
+
+    /* hearts animation */
+    .hearts{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+    .heart{
+      position:absolute;width:18px;height:18px;
+      background:radial-gradient(circle at 30% 30%,#fff 0 10%,transparent 10%),linear-gradient(135deg,#ff93c6,#ffd1e6);
+      clip-path:path("M10 3.2c-1.9-1.6-4.9-1.2-6.6.8C.2 7.1 6 13.6 10 17 14 13.6 19.8 7.1 16.6 4c-1.7-2-4.7-2.4-6.6-.8z");
+      animation:floatUp linear infinite;
+      opacity:.9;
+    }
+    @keyframes floatUp{
+      0%{transform:translateY(110vh) rotate(-10deg);opacity:0}
+      10%{opacity:1}
+      100%{transform:translateY(-20vh) rotate(20deg);opacity:0}
+    }
+
+    @media(max-width:420px){
+      .container{padding:18px}
+      .btn{width:100%}
+      .poem p{font-size:15px}
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body>
+  <div class="hearts" id="hearts"></div>
 
-  <!-- Header -->
-  <header class="bg-indigo-700 text-white p-6 shadow-md">
-    <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-      <!-- Logo -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Lambang_Kabupaten_Mamuju.png" 
-           alt="Logo Kabupaten Mamuju" class="w-16 h-16 md:w-20 md:h-20">
-      <div class="text-center md:text-left">
-        <h1 class="text-2xl md:text-3xl font-bold">
-          PROYEKSI PPPK SAMPAI DESEMBER 2025
-        </h1>
-        <p class="text-sm italic text-indigo-200">
-          Kabupaten Mamuju
-        </p>
-      </div>
-    </div>
-  </header>
-
-  <main class="max-w-6xl mx-auto p-4">
-    <!-- Filter -->
-    <div class="bg-white p-4 rounded-2xl shadow mb-6">
-      <label for="filterColumn" class="block text-sm font-medium text-gray-700 mb-2">
-        Pilih Data yang Ditampilkan
-      </label>
-      <select id="filterColumn" class="w-full p-2 border rounded-lg focus:ring focus:ring-indigo-300"></select>
+  <div class="container">
+    <div id="intro">
+      <h1>Halo Comelku, I miss u ❤️</h1>
+      <p class="subtitle">Ada pesan untukmu...</p>
+      <button class="btn" id="lihat">Lihat Pesan</button>
     </div>
 
-    <!-- Tabel -->
-    <div class="overflow-x-auto bg-white rounded-2xl shadow-lg">
-      <table id="dataTable" class="min-w-full text-sm text-left">
-        <thead class="bg-indigo-600 text-white">
-          <tr id="tableHeader"></tr>
-        </thead>
-        <tbody id="tableBody" class="divide-y divide-gray-200"></tbody>
-      </table>
+    <div id="puisi" class="poem">
+      <h2>🌙 Puisi Rindu — Untukmu, Comelku</h2>
+      <p>
+        Ada yang tak pernah hilang,<br>
+        meski jarak terus berjalan.<br>
+        Suaramu masih meneduh di ingatan,<br>
+        senyummu masih tinggal di antara jeda hariku.<br><br>
+        Aku tak menunggu dengan resah,<br>
+        hanya belajar tenang dalam rindu yang ramah.<br>
+        Sebab aku tahu,<br>
+        setiap yang tulus, tak akan pergi jauh.<br><br>
+        Dan jika malam terasa panjang,<br>
+        aku cukup berbisik pelan dalam doa:<br>
+        semoga kau baik di sana,<br>
+        karena di sini, aku masih sama —<br>
+        <strong>merindu, diam-diam.</strong>
+      </p>
+      <p class="note"><em>Dari seseorang yang masih merindukanmu diam-diam 💌</em></p>
     </div>
-  </main>
+  </div>
+
+  <audio id="musik" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/04/12/audio_8ec9b1bb38.mp3?filename=romantic-piano-14751.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQclL6uES4NQ2BcIJ02L-yU4TQHuCicwFgEctD76Emj6PGtv2fY2kdgTrlB9izqNs4swIsIX7w7Z06c/pub?output=csv";
-
-    let csvData = [];
-    let headers = [];
-
-    Papa.parse(csvUrl, {
-      download: true,
-      header: true,
-      complete: function(results) {
-        csvData = results.data;
-        headers = results.meta.fields;
-
-        // Filter: skip NMSKPD (index 0), mulai dari kolom ke-2
-        const filterSelect = document.getElementById("filterColumn");
-        headers.slice(1).forEach(h => {
-          let option = document.createElement("option");
-          option.value = h;
-          option.textContent = h;
-          filterSelect.appendChild(option);
-        });
-
-        // Render awal
-        renderTable(headers[1]);
-
-        // Event filter
-        filterSelect.addEventListener("change", function() {
-          renderTable(this.value);
-        });
-      }
-    });
-
-    function renderTable(filterColumn) {
-      const tableHeader = document.getElementById("tableHeader");
-      const tableBody = document.getElementById("tableBody");
-      tableHeader.innerHTML = "";
-      tableBody.innerHTML = "";
-
-      // Header: selalu tampil NMSKPD + kolom terpilih
-      ["NMSKPD", filterColumn].forEach(h => {
-        const th = document.createElement("th");
-        th.className = "px-4 py-2";
-        th.textContent = h;
-        tableHeader.appendChild(th);
-      });
-
-      // Body: tampil NMSKPD + kolom terpilih
-      csvData.forEach(row => {
-        const tr = document.createElement("tr");
-
-        ["NMSKPD", filterColumn].forEach(h => {
-          const td = document.createElement("td");
-          td.className = "px-4 py-2 whitespace-nowrap";
-          td.textContent = row[h];
-          if (h === filterColumn) {
-            td.classList.add("font-semibold", "text-indigo-700");
-          }
-          tr.appendChild(td);
-        });
-
-        tableBody.appendChild(tr);
-      });
+    const hearts=document.getElementById('hearts');
+    for(let i=0;i<12;i++){
+      const h=document.createElement('div');
+      h.className='heart';
+      h.style.left=Math.random()*100+'%';
+      h.style.animationDuration=(6+Math.random()*6)+'s';
+      h.style.animationDelay=(Math.random()*3)+'s';
+      hearts.appendChild(h);
     }
-  </script>
 
+    const btn=document.getElementById('lihat');
+    const intro=document.getElementById('intro');
+    const puisi=document.getElementById('puisi');
+    const musik=document.getElementById('musik');
+
+    btn.onclick=()=>{
+      intro.style.display='none';
+      puisi.classList.add('visible');
+      musik.volume=0.5;
+      musik.play().catch(()=>{});
+    };
+  </script>
 </body>
 </html>
