@@ -5,81 +5,122 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Halo Comelku — Pesan Rindu</title>
 
-  <!-- Google Font -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg1:#fff5f8;
-      --bg2:#ffeef6;
-      --accent:#d63384;
-      --accent-dark:#b42d70;
-      --muted:#6b6b6b;
+    :root {
+      --bg1: #fff5f8;
+      --bg2: #ffeef6;
+      --accent: #d63384;
+      --accent-dark: #b42d70;
+      --muted: #6b6b6b;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Poppins",sans-serif;
-      background:linear-gradient(135deg,var(--bg1),var(--bg2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      text-align:center;
-      overflow:hidden;
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      min-height: 100vh;
+      overflow-y: auto;
     }
-    .container{
-      max-width:720px;
-      background:rgba(255,255,255,0.75);
-      backdrop-filter:blur(6px);
-      border-radius:16px;
-      padding:28px;
-      box-shadow:0 10px 25px rgba(0,0,0,0.1);
-      position:relative;
+
+    .container {
+      width: 100%;
+      max-width: 720px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      position: relative;
+      margin-bottom: 60px;
     }
-    h1{color:var(--accent);margin-bottom:8px}
-    .subtitle{color:var(--muted);margin-bottom:18px}
-    .btn{
-      background:linear-gradient(180deg,var(--accent),var(--accent-dark));
-      color:#fff;
-      border:none;
-      padding:12px 28px;
-      border-radius:999px;
-      font-weight:600;
-      cursor:pointer;
-      font-size:1rem;
-      transition:opacity .2s;
-      text-decoration:none;
-      display:inline-block;
+
+    h1 { color: var(--accent); margin-bottom: 8px; }
+    .subtitle { color: var(--muted); margin-bottom: 18px; }
+
+    .btn {
+      background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: opacity .2s;
+      text-decoration: none;
+      display: inline-block;
     }
-    .btn:hover{opacity:.9}
-    .poem{display:none;opacity:0;transition:opacity .6s ease}
-    .poem.visible{display:block;opacity:1}
-    .poem h2{color:#5b2b4a}
-    .poem p{text-align:left;line-height:1.7;color:#444}
-    .note{font-size:.9rem;color:#777;margin-top:10px}
-    .hearts{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-    .heart{
-      position:absolute;width:18px;height:18px;
-      background:radial-gradient(circle at 30% 30%,#fff 0 10%,transparent 10%),linear-gradient(135deg,#ff93c6,#ffd1e6);
-      clip-path:path("M10 3.2c-1.9-1.6-4.9-1.2-6.6.8C.2 7.1 6 13.6 10 17 14 13.6 19.8 7.1 16.6 4c-1.7-2-4.7-2.4-6.6-.8z");
-      animation:floatUp linear infinite;
-      opacity:.9;
+
+    .btn:hover { opacity: .9; }
+
+    .poem { display: none; opacity: 0; transition: opacity .6s ease; }
+    .poem.visible { display: block; opacity: 1; }
+
+    .poem h2 { color: #5b2b4a; }
+    .poem p { text-align: left; line-height: 1.7; color: #444; }
+
+    .note { font-size: .9rem; color: #777; margin-top: 10px; }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
     }
-    @keyframes floatUp{
-      0%{transform:translateY(110vh) rotate(-10deg);opacity:0}
-      10%{opacity:1}
-      100%{transform:translateY(-20vh) rotate(20deg);opacity:0}
+
+    .heart {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle at 30% 30%, #fff 0 10%, transparent 10%), linear-gradient(135deg, #ff93c6, #ffd1e6);
+      clip-path: path("M10 3.2c-1.9-1.6-4.9-1.2-6.6.8C.2 7.1 6 13.6 10 17 14 13.6 19.8 7.1 16.6 4c-1.7-2-4.7-2.4-6.6-.8z");
+      animation: floatUp linear infinite;
+      opacity: .9;
     }
-    @media(max-width:420px){
-      .container{padding:18px}
-      .btn{width:100%}
-      .poem p{font-size:15px}
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(20deg); opacity: 0; }
+    }
+
+    .music-btn {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
+      z-index: 99;
+    }
+
+    @media (max-width: 420px) {
+      .container { padding: 18px; }
+      .btn { width: 100%; }
+      .poem p { font-size: 15px; }
     }
   </style>
 </head>
+
 <body>
   <div class="hearts" id="hearts"></div>
 
@@ -123,27 +164,43 @@
     <source src="https://cdn.pixabay.com/download/audio/2023/04/12/audio_8ec9b1bb38.mp3?filename=romantic-piano-14751.mp3" type="audio/mpeg">
   </audio>
 
+  <button id="toggleMusic" class="music-btn" title="Hidupkan / Matikan Musik">🎵</button>
+
   <script>
-    const hearts=document.getElementById('hearts');
-    for(let i=0;i<12;i++){
-      const h=document.createElement('div');
-      h.className='heart';
-      h.style.left=Math.random()*100+'%';
-      h.style.animationDuration=(6+Math.random()*6)+'s';
-      h.style.animationDelay=(Math.random()*3)+'s';
+    const hearts = document.getElementById('hearts');
+    for (let i = 0; i < 12; i++) {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.style.left = Math.random() * 100 + '%';
+      h.style.animationDuration = (6 + Math.random() * 6) + 's';
+      h.style.animationDelay = (Math.random() * 3) + 's';
       hearts.appendChild(h);
     }
 
-    const btn=document.getElementById('lihat');
-    const intro=document.getElementById('intro');
-    const puisi=document.getElementById('puisi');
-    const musik=document.getElementById('musik');
+    const btn = document.getElementById('lihat');
+    const intro = document.getElementById('intro');
+    const puisi = document.getElementById('puisi');
+    const musik = document.getElementById('musik');
+    const toggle = document.getElementById('toggleMusic');
+    let isPlaying = false;
 
-    btn.onclick=()=>{
-      intro.style.display='none';
+    btn.onclick = () => {
+      intro.style.display = 'none';
       puisi.classList.add('visible');
-      musik.volume=0.5;
-      musik.play().catch(()=>{});
+      musik.volume = 0.5;
+      musik.play().then(() => isPlaying = true).catch(() => {});
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    toggle.onclick = () => {
+      if (isPlaying) {
+        musik.pause();
+        toggle.textContent = '🔇';
+      } else {
+        musik.play();
+        toggle.textContent = '🎵';
+      }
+      isPlaying = !isPlaying;
     };
   </script>
 </body>
