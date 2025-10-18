@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Halo Comelku — Pesan Rindu</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
   <style>
@@ -25,10 +24,12 @@
       background: linear-gradient(135deg, var(--bg1), var(--bg2));
       display: flex;
       justify-content: center;
+      align-items: flex-start;
       padding: 24px;
       text-align: center;
       min-height: 100vh;
       overflow-y: auto;
+      transition: background 1s ease;
     }
 
     .container {
@@ -41,9 +42,11 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       position: relative;
       margin-bottom: 60px;
+      transition: opacity .6s ease;
     }
 
     h1 { color: var(--accent); margin-bottom: 8px; }
+    h2 { color: #5b2b4a; }
     .subtitle { color: var(--muted); margin-bottom: 18px; }
 
     .btn {
@@ -59,13 +62,11 @@
       text-decoration: none;
       display: inline-block;
     }
-
     .btn:hover { opacity: .9; }
 
-    .poem { display: none; opacity: 0; transition: opacity .6s ease; }
+    .poem { display: none; opacity: 0; }
     .poem.visible { display: block; opacity: 1; }
 
-    .poem h2 { color: #5b2b4a; }
     .poem p { text-align: left; line-height: 1.7; color: #444; }
 
     .note { font-size: .9rem; color: #777; margin-top: 10px; }
@@ -124,14 +125,14 @@
 <body>
   <div class="hearts" id="hearts"></div>
 
-  <div class="container">
+  <div class="container" id="page1">
     <div id="intro">
       <h1>Halo Comelku, I miss u ❤️</h1>
       <p class="subtitle">Ada pesan untukmu...</p>
       <button class="btn" id="lihat">Lihat Pesan</button>
     </div>
 
-    <div id="puisi" class="poem">
+    <div id="puisi1" class="poem">
       <h2>🌙 Puisi Rindu — Untukmu, Comelku</h2>
       <p>
         Ada yang tak pernah hilang,<br>
@@ -151,13 +152,40 @@
       <p class="note"><em>Dari seseorang yang masih merindukanmu diam-diam 💌</em></p>
 
       <br>
-      <p style="margin-top:24px;color:#5b2b4a;font-weight:500;">
-        Kalau kamu juga rindu... klik tombol di bawah ini 💖
-      </p>
-      <a href="https://wa.me/6285756047187?text=hay,%20miss%20you%20to%20💌" target="_blank" class="btn">
-        Klik tombol di bawah ini
-      </a>
+      <button id="nextPage" class="btn">Sabtu, 18 Oktober 2025</button>
     </div>
+  </div>
+
+  <div class="container" id="page2" style="display:none; opacity:0;">
+    <h2>Sabtu, 18 Oktober 2025</h2>
+    <p><strong>Untuk Comellcu — Di Pelabuhan Sukarno Hatta</strong></p>
+    <p>
+      Jam satu dini hari,<br>
+      kau kirimkan fotomu dari Pelabuhan Sukarno Hatta,<br>
+      sementara aku masih terlelap,<br>
+      tak sempat menjawab sapamu.<br><br>
+      Pagi ini aku terbangun,<br>
+      dan hal pertama yang kulihat adalah wajahmu<br>
+      yang tersenyum di antara lampu-lampu pelabuhan.<br>
+      Namun aku tahu, senyum itu juga menyimpan pesan diam:<br><br>
+      “Tunggulah aku.”<br><br>
+      Maka aku menjawab dalam sunyi:<br><br>
+      <em>Demi Allah yang menjaga setiap ombak dan langkahmu,<br>
+      aku akan tetap di sini —<br>
+      menjagamu dalam doa,<br>
+      seperti pelabuhan menjaga kapal-kapal yang pulang.</em><br><br>
+      Berlayarlah, Comellcu.<br>
+      Jika rinduku tak mampu mengikutimu,<br>
+      biarlah Allah yang menjaga dari kejauhan.<br>
+      Dan andai waktu terasa lama,<br>
+      aku tak akan bertanya “Kapan?”<br><br>
+      Karena orang yang mencintai<br>
+      tidak menagih kepulangan —<br>
+      <strong>ia hanya menunggu.</strong>
+    </p>
+    <a href="https://wa.me/6285756047187?text=Hai%20Comellcu,%20aku%20juga%20rindu%20💌" target="_blank" class="btn">Kirim Pesan di WhatsApp 💖</a>
+    <br><br>
+    <button id="backPage" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
   </div>
 
   <audio id="musik" loop>
@@ -167,6 +195,7 @@
   <button id="toggleMusic" class="music-btn" title="Hidupkan / Matikan Musik">🎵</button>
 
   <script>
+    // Animasi hati
     const hearts = document.getElementById('hearts');
     for (let i = 0; i < 12; i++) {
       const h = document.createElement('div');
@@ -177,21 +206,51 @@
       hearts.appendChild(h);
     }
 
+    // Elemen utama
     const btn = document.getElementById('lihat');
     const intro = document.getElementById('intro');
-    const puisi = document.getElementById('puisi');
+    const puisi1 = document.getElementById('puisi1');
     const musik = document.getElementById('musik');
     const toggle = document.getElementById('toggleMusic');
+    const nextPage = document.getElementById('nextPage');
+    const backPage = document.getElementById('backPage');
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
     let isPlaying = false;
 
+    // Tampilkan puisi pertama
     btn.onclick = () => {
       intro.style.display = 'none';
-      puisi.classList.add('visible');
+      puisi1.classList.add('visible');
       musik.volume = 0.5;
-      musik.play().then(() => isPlaying = true).catch(() => {});
+      musik.play()
+        .then(() => { isPlaying = true; toggle.textContent = '🎵'; })
+        .catch(() => alert("Klik tombol 🎵 di pojok kanan bawah untuk memutar musik 💖"));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    // Navigasi halaman
+    nextPage.onclick = () => {
+      page1.style.opacity = 0;
+      setTimeout(() => {
+        page1.style.display = 'none';
+        page2.style.display = 'block';
+        setTimeout(() => page2.style.opacity = 1, 50);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 600);
+    };
+
+    backPage.onclick = () => {
+      page2.style.opacity = 0;
+      setTimeout(() => {
+        page2.style.display = 'none';
+        page1.style.display = 'block';
+        setTimeout(() => page1.style.opacity = 1, 50);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 600);
+    };
+
+    // Kontrol musik
     toggle.onclick = () => {
       if (isPlaying) {
         musik.pause();
