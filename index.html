@@ -142,9 +142,9 @@ h2 { color: #5b2b4a; }
     kau kirimkan fotomu dari Pelabuhan Sukarno Hatta,<br>
     sementara aku masih terlelap,<br>
     tak sempat menjawab sapamu.<br><br>
-    Pagi ini aku terbangun,<br>
-    dan hal pertama yang kulihat adalah wajahmu<br>
-    yang tersenyum di antara lampu-lampu pelabuhan.<br>
+    Pagi ini aku terbangun,
+    dan hal pertama yang kulihat adalah wajahmu
+    yang tersenyum di antara lampu-lampu pelabuhan.
     Namun aku tahu, senyum itu juga menyimpan pesan diam:<br><br>
     “Tunggulah aku.”<br><br>
     Maka aku menjawab dalam sunyi:<br><br>
@@ -237,8 +237,51 @@ h2 { color: #5b2b4a; }
     lalu pura-pura tak bersalah.
   </p>
   <br>
-  <a href="https://wa.me/6285756047187?text=Hai,%20aku%20juga%20rindu%20💌" target="_blank" class="btn">Kirim Pesan di WhatsApp 💖</a><br><br>
+  <button id="toPage5" class="btn">Selasa, 21 Oktober 2025</button><br><br>
   <button id="back3" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
+</div>
+
+<!-- Halaman 5 -->
+<div class="container" id="page5" style="display:none; opacity:0;">
+  <h2>Selasa, 21 Oktober 2025</h2>
+  <p><strong>Di Antara Wisuda dan Rindu</strong></p>
+  <p>
+    Hari ini kau di Jogja,<br>
+    berdiri di antara toga dan tepuk tangan di kampus Gadjah Mada —<br>
+    tempat ilmu dan sejarah saling berbisik tentang perjuangan.<br>
+    Adikmu naik ke panggung,<br>
+    dan aku tahu, senyummu hari ini pasti yang paling manis di ruangan itu.<br><br>
+    Aku di Mamuju,<br>
+    menonton dari jauh tanpa layar, tanpa suara,<br>
+    hanya lewat bayangan yang tersisa di kepalaku.<br>
+    Aku tak ingin mengganggu —<br>
+    biarlah hari ini jadi milikmu dan keluargamu,<br>
+    karena aku tahu, bahagiaku cukup dari bayanganmu yang tertawa.<br><br>
+    Lalu kau kirim satu foto,<br>
+    dan aku melihat matamu sedikit bengkak.<br>
+    Entah karena lelah, bahagia, atau rindu yang tak kau sebut.<br>
+    Ah, mungkin semalam kamu terlalu cantik di dalam mimpiku,<br>
+    sampai matamu ikut lelah menahan tatapan.<br><br>
+    Kalau boleh sedikit nakal,<br>
+    aku ingin bilang —<br>
+    biar saja matamu bengkak, asal jangan hatimu.<br>
+    Biar aku saja yang menanggung sesaknya,<br>
+    karena setiap kali kamu berkedip,<br>
+    ada sesuatu di dadaku yang ikut berdenyut pelan.<br><br>
+    Dan di sela keramaian wisuda itu,<br>
+    aku yakin Gajah Mada pun akan tersenyum,<br>
+    melihat dua orang yang masih berjuang menyatukan jarak<br>
+    lebih keras daripada ia dulu menyatukan nusantara.<br><br>
+    Jadi nikmatilah hari ini,<br>
+    dengan mata yang mungkin bengkak tapi tetap indah.<br>
+    Karena dari Mamuju,<br>
+    ada seseorang yang diam-diam iri pada udara Jogja —<br>
+    sebab ia bisa menyentuh pipimu,<br>
+    sementara aku hanya bisa menulis tentangnya.
+  </p>
+  <br>
+  <a href="https://wa.me/6285756047187?text=Hai,%20aku%20juga%20rindu%20💌" target="_blank" class="btn">Kirim Pesan di WhatsApp 💖</a><br><br>
+  <button id="back4" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
 </div>
 
 <!-- Musik -->
@@ -261,6 +304,7 @@ for (let i = 0; i < 12; i++) {
 const musik = document.getElementById('musik');
 const toggle = document.getElementById('toggleMusic');
 let isPlaying = false;
+
 const intro = document.getElementById('intro');
 const puisi1 = document.getElementById('puisi1');
 const lihat = document.getElementById('lihat');
@@ -268,12 +312,17 @@ const page1 = document.getElementById('page1');
 const page2 = document.getElementById('page2');
 const page3 = document.getElementById('page3');
 const page4 = document.getElementById('page4');
+const page5 = document.getElementById('page5');
+
 const toPage2 = document.getElementById('toPage2');
 const toPage3 = document.getElementById('toPage3');
 const toPage4 = document.getElementById('toPage4');
+const toPage5 = document.getElementById('toPage5');
+
 const back1 = document.getElementById('back1');
 const back2 = document.getElementById('back2');
 const back3 = document.getElementById('back3');
+const back4 = document.getElementById('back4');
 
 lihat.onclick = () => {
   intro.style.display = 'none';
@@ -300,6 +349,8 @@ toPage3.onclick = () => fadeTo(page2, page3);
 back2.onclick = () => fadeTo(page3, page2);
 toPage4.onclick = () => fadeTo(page3, page4);
 back3.onclick = () => fadeTo(page4, page3);
+toPage5.onclick = () => fadeTo(page4, page5);
+back4.onclick = () => fadeTo(page5, page4);
 
 toggle.onclick = () => {
   if (isPlaying) { musik.pause(); toggle.textContent = '🔇'; }
