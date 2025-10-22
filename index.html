@@ -280,8 +280,63 @@ h2 { color: #5b2b4a; }
     sementara aku hanya bisa menulis tentangnya.
   </p>
   <br>
-  <a href="https://wa.me/6285756047187?text=Hai,%20aku%20juga%20rindu%20💌" target="_blank" class="btn">Kirim Pesan di WhatsApp 💖</a><br><br>
   <button id="back4" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
+</div>
+
+  <!-- Halaman 6 -->
+<div class="container" id="page6" style="display:none; opacity:0;">
+  <h2>Rabu, 22 Oktober 2025</h2>
+  <p><strong>Tidur Siang dan Sedikit Rindu</strong></p>
+  <p>
+    Hari ini aku nggak ke Arteri,<br>
+    nggak beli Americano,<br>
+    nggak juga lihat kursi penumpang sebelah.<br><br>
+    Cuma pulang dari kantor,<br>
+    rebahan siang dengan niat balas lelah.<br>
+    Tapi nyatanya,<br>
+    yang datang malah bayanganmu —<br>
+    pelan, tapi bandel,<br>
+    seperti aroma kopi yang nggak mau hilang dari baju.<br><br>
+    Mungkin kau masih di Jogja,<br>
+    jalan di sekitar Malioboro,<br>
+    atau duduk santai di Tugu,<br>
+    dan aku di sini cuma bisa membayangkan<br>
+    bagaimana kau terlihat di antara cahaya sore itu.<br><br>
+    Comellcu,<br>
+    kau memang pandai meninggalkan jarak,<br>
+    tapi kau lupa meninggalkan tenang di sini.<br><br>
+    Aku akhirnya tertidur juga,<br>
+    tapi cuma sebentar —<br>
+    karena jujur,<br>
+    tidur siang tanpa kau ganggu<br>
+    rasanya terlalu sepi.<br><br>
+    Jogja boleh memelukmu sekarang,<br>
+    tapi rinduku masih belum tahu cara berhenti mencarimu.<br><br>
+    Kadang aku pikir,<br>
+    apakah aku pantas merindukanmu sejauh ini —<br>
+    merindukan hal-hal kecil yang bahkan mungkin tak kau sadari?<br><br>
+    Seperti caramu membenarkan jilbab pelan sebelum turun dari mobil,<br>
+    atau tatapan singkat yang kau lempar waktu tahu aku diam memperhatikan.<br><br>
+    Aku tahu, aku bukan siapa-siapamu,<br>
+    tapi anehnya, tiap kali aku coba berhenti,<br>
+    rindu ini malah makin pandai mencari alasan untuk hidup.<br><br>
+    Mungkin memang begini caranya semesta menggoda:<br>
+    kau dikirim bukan untuk dimiliki,<br>
+    tapi untuk membuatku belajar<br>
+    betapa nikmatnya menyimpan rahasia kecil<br>
+    yang bahkan tak pernah benar-benar kau beri.<br><br>
+    Dan lucunya,<br>
+    semakin aku sadar kau tak bisa kumiliki,<br>
+    semakin aku ingin kau tahu<br>
+    bahwa setiap kali aku menutup mata —<br>
+    yang paling sering lewat bukan doa,<br>
+    tapi bayanganmu...<br>
+    yang terlalu manis untuk disebut dosa,<br>
+    tapi terlalu hangat untuk disebut biasa.
+  </p>
+  <br>
+   <a href="https://wa.me/6285756047187?text=Hai,%20aku%20juga%20rindu%20💌" target="_blank" class="btn">Kirim Pesan di WhatsApp 💖</a><br><br>
+  <button id="back5" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
 </div>
 
 <!-- Musik -->
@@ -323,6 +378,18 @@ const back1 = document.getElementById('back1');
 const back2 = document.getElementById('back2');
 const back3 = document.getElementById('back3');
 const back4 = document.getElementById('back4');
+
+const page6 = document.getElementById('page6');
+const back5 = document.getElementById('back5');
+const toPage6 = document.createElement('button');
+toPage6.id = 'toPage6';
+toPage6.className = 'btn';
+toPage6.textContent = 'Rabu, 22 Oktober 2025';
+page5.appendChild(toPage6);
+
+toPage6.onclick = () => fadeTo(page5, page6);
+back5.onclick = () => fadeTo(page6, page5);
+
 
 lihat.onclick = () => {
   intro.style.display = 'none';
