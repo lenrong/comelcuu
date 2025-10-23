@@ -401,14 +401,20 @@ const musik = document.getElementById('musik');
 const toggle = document.getElementById('toggleMusic');
 let isPlaying = false;
 
-const intro = document.getElementById('intro');
+// ====== Elemen Halaman ======
+const intro  = document.getElementById('intro');
 const puisi1 = document.getElementById('puisi1');
-const lihat = document.getElementById('lihat');
+
 const page1 = document.getElementById('page1');
 const page2 = document.getElementById('page2');
 const page3 = document.getElementById('page3');
 const page4 = document.getElementById('page4');
 const page5 = document.getElementById('page5');
+const page6 = document.getElementById('page6');
+const page7 = document.getElementById('page7');
+
+// ====== Tombol Navigasi Tiap Halaman ======
+const lihat  = document.getElementById('lihat');
 
 const toPage2 = document.getElementById('toPage2');
 const toPage3 = document.getElementById('toPage3');
@@ -419,22 +425,38 @@ const back1 = document.getElementById('back1');
 const back2 = document.getElementById('back2');
 const back3 = document.getElementById('back3');
 const back4 = document.getElementById('back4');
-
-const page6 = document.getElementById('page6');
 const back5 = document.getElementById('back5');
-const toPage6 = document.createElement('button');
-const page7 = document.getElementById('page7');
 const back6 = document.getElementById('back6');
+
+// ====== Tambahan Halaman Dinamis ======
+// Tombol ke halaman 6 (dibuat manual lewat JS)
+const toPage6 = document.createElement('button');
+toPage6.id = 'toPage6';
+toPage6.className = 'btn';
+toPage6.textContent = 'Selasa, 22 Oktober 2025';
+page5.appendChild(toPage6);
+
+// Tombol ke halaman 7 (dibuat manual lewat JS)
 const toPage7 = document.createElement('button');
 toPage7.id = 'toPage7';
 toPage7.className = 'btn';
 toPage7.textContent = 'Kamis, 23 Oktober 2025';
 page6.appendChild(toPage7);
 
+// ====== Aksi Navigasi Halaman ======
+toPage2.onclick = () => fadeTo(page1, page2);
+toPage3.onclick = () => fadeTo(page2, page3);
+toPage4.onclick = () => fadeTo(page3, page4);
+toPage5.onclick = () => fadeTo(page4, page5);
+toPage6.onclick = () => fadeTo(page5, page6);
 toPage7.onclick = () => fadeTo(page6, page7);
+
+back1.onclick = () => fadeTo(page2, page1);
+back2.onclick = () => fadeTo(page3, page2);
+back3.onclick = () => fadeTo(page4, page3);
+back4.onclick = () => fadeTo(page5, page4);
+back5.onclick = () => fadeTo(page6, page5);
 back6.onclick = () => fadeTo(page7, page6);
-
-
 
 lihat.onclick = () => {
   intro.style.display = 'none';
