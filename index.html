@@ -1,496 +1,673 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Halo Comelku — Pesan Rindu</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg1: #fff5f8;
-  --bg2: #ffeef6;
-  --accent: #d63384;
-  --accent-dark: #b42d70;
-  --muted: #6b6b6b;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, var(--bg1), var(--bg2));
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 24px;
-  text-align: center;
-  min-height: 100vh;
-  overflow-y: auto;
-  transition: background 1s ease;
-}
-.container {
-  width: 100%;
-  max-width: 720px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(6px);
-  border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  position: relative;
-  margin-bottom: 60px;
-  transition: opacity .6s ease;
-}
-h1 { color: var(--accent); margin-bottom: 8px; }
-h2 { color: #5b2b4a; }
-.subtitle { color: var(--muted); margin-bottom: 18px; }
-.btn {
-  background: linear-gradient(180deg, var(--accent), var(--accent-dark));
-  color: #fff;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 999px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: opacity .2s;
-  text-decoration: none;
-  display: inline-block;
-}
-.btn:hover { opacity: .9; }
-.poem { display: none; opacity: 0; }
-.poem.visible { display: block; opacity: 1; }
-.poem p { text-align: left; line-height: 1.7; color: #444; }
-.note { font-size: .9rem; color: #777; margin-top: 10px; }
-.hearts { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
-.heart {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: radial-gradient(circle at 30% 30%, #fff 0 10%, transparent 10%), linear-gradient(135deg, #ff93c6, #ffd1e6);
-  clip-path: path("M10 3.2c-1.9-1.6-4.9-1.2-6.6.8C.2 7.1 6 13.6 10 17 14 13.6 19.8 7.1 16.6 4c-1.7-2-4.7-2.4-6.6-.8z");
-  animation: floatUp linear infinite;
-  opacity: .9;
-}
-@keyframes floatUp {
-  0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
-  10% { opacity: 1; }
-  100% { transform: translateY(-20vh) rotate(20deg); opacity: 0; }
-}
-.music-btn {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  cursor: pointer;
-  z-index: 99;
-}
-@media (max-width: 420px) {
-  .container { padding: 18px; }
-  .btn { width: 100%; }
-  .poem p { font-size: 15px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halo Comelku — Pesan Rindu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg1: #fff5f8;
+            --bg2: #ffeef6;
+            --accent: #ff66a3;
+            --accent-dark: #e0558f;
+            --muted: #8a6b7c;
+            --text: #5b2b4a;
+            --light-pink: #ffecf5;
+            --medium-pink: #ffc2e0;
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 24px;
+            text-align: center;
+            min-height: 100vh;
+            overflow-y: auto;
+            transition: background 1s ease;
+            color: var(--text);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 720px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(6px);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.15);
+            position: relative;
+            margin-bottom: 60px;
+            transition: opacity .6s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff9ec5, #ff66a3, #ff9ec5);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        h1 { 
+            color: var(--accent); 
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 2.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        h2 { 
+            color: var(--text); 
+            margin-bottom: 20px;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            border-radius: 3px;
+        }
+        
+        .subtitle { 
+            color: var(--muted); 
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 8px;
+            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(214, 51, 132, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn-back {
+            background: linear-gradient(180deg, #b8a7b3, #9c8494);
+        }
+        
+        .btn-back:hover {
+            box-shadow: 0 6px 20px rgba(156, 132, 148, 0.4);
+        }
+        
+        .poem { 
+            display: none; 
+            opacity: 0; 
+        }
+        
+        .poem.visible { 
+            display: block; 
+            opacity: 1; 
+            animation: fadeIn 1s ease;
+        }
+        
+        .poem p { 
+            text-align: left; 
+            line-height: 1.8; 
+            color: #5a4a50;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+        }
+        
+        .note { 
+            font-size: .95rem; 
+            color: var(--muted); 
+            margin-top: 20px;
+            font-style: italic;
+            border-left: 3px solid var(--medium-pink);
+            padding-left: 12px;
+        }
+        
+        .hearts { 
+            position: fixed; 
+            inset: 0; 
+            overflow: hidden; 
+            pointer-events: none; 
+            z-index: -1; 
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #fff 0 10%, transparent 10%), 
+                        linear-gradient(135deg, #ff93c6, #ffd1e6);
+            clip-path: path("M10 3.2c-1.9-1.6-4.9-1.2-6.6.8C.2 7.1 6 13.6 10 17 14 13.6 19.8 7.1 16.6 4c-1.7-2-4.7-2.4-6.6-.8z");
+            animation: floatUp linear infinite;
+            opacity: .8;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(-10deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(20deg); opacity: 0; }
+        }
+        
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            cursor: pointer;
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .flower-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.15;
+            z-index: -1;
+        }
+        
+        .flower-1 {
+            top: 20px;
+            left: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .flower-2 {
+            bottom: 20px;
+            right: 20px;
+            transform: rotate(-10deg);
+        }
+        
+        .date-badge {
+            display: inline-block;
+            background: var(--light-pink);
+            color: var(--text);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 1px solid var(--medium-pink);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 480px) {
+            .container { 
+                padding: 20px; 
+                border-radius: 16px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn { 
+                width: 100%; 
+                margin: 5px 0;
+            }
+            
+            .poem p { 
+                font-size: 1rem; 
+            }
+            
+            body {
+                padding: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="hearts" id="hearts"></div>
+    <div class="hearts" id="hearts"></div>
+    
+    <!-- Halaman 1 -->
+    <div class="container" id="page1">
+        <div class="flower-decoration flower-1">
+            <i class="fas fa-heart" style="font-size: 80px; color: #ff66a3;"></i>
+        </div>
+        <div class="flower-decoration flower-2">
+            <i class="fas fa-heart" style="font-size: 80px; color: #ff66a3;"></i>
+        </div>
+        
+        <div id="intro">
+            <h1>Halo Comelku, I miss u ❤️</h1>
+            <p class="subtitle">Ada pesan rindu untukmu...</p>
+            <button class="btn" id="lihat">
+                <i class="fas fa-envelope-open-text" style="margin-right: 8px;"></i>Lihat Pesan
+            </button>
+        </div>
+        <div id="puisi1" class="poem">
+            <h2><i class="fas fa-moon" style="margin-right: 10px;"></i>Puisi Rindu — Untukmu, Comelku</h2>
+            <p>
+                Ada yang tak pernah hilang,<br>
+                meski jarak terus berjalan.<br>
+                Suaramu masih meneduh di ingatan,<br>
+                senyummu masih tinggal di antara jeda hariku.<br><br>
+                Aku tak menunggu dengan resah,<br>
+                hanya belajar tenang dalam rindu yang ramah.<br>
+                Sebab aku tahu,<br>
+                setiap yang tulus, tak akan pergi jauh.<br><br>
+                Dan jika malam terasa panjang,<br>
+                aku cukup berbisik pelan dalam doa:<br>
+                semoga kau baik di sana,<br>
+                karena di sini, aku masih sama —<br>
+                <strong>merindu, diam-diam.</strong>
+            </p>
+            <p class="note"><em>Dari seseorang yang masih merindukanmu diam-diam 💌</em></p>
+            <br>
+            <button id="toPage2" class="btn">
+                <i class="far fa-calendar-alt" style="margin-right: 8px;"></i>Sabtu, 18 Oktober 2025
+            </button>
+        </div>
+    </div>
 
-<!-- Halaman 1 -->
-<div class="container" id="page1">
-  <div id="intro">
-    <h1>Halo Comelku, I miss u ❤️</h1>
-    <p class="subtitle">Ada pesan untukmu...</p>
-    <button class="btn" id="lihat">Lihat Pesan</button>
-  </div>
-  <div id="puisi1" class="poem">
-    <h2>🌙 Puisi Rindu — Untukmu, Comelku</h2>
-    <p>
-      Ada yang tak pernah hilang,<br>
-      meski jarak terus berjalan.<br>
-      Suaramu masih meneduh di ingatan,<br>
-      senyummu masih tinggal di antara jeda hariku.<br><br>
-      Aku tak menunggu dengan resah,<br>
-      hanya belajar tenang dalam rindu yang ramah.<br>
-      Sebab aku tahu,<br>
-      setiap yang tulus, tak akan pergi jauh.<br><br>
-      Dan jika malam terasa panjang,<br>
-      aku cukup berbisik pelan dalam doa:<br>
-      semoga kau baik di sana,<br>
-      karena di sini, aku masih sama —<br>
-      <strong>merindu, diam-diam.</strong>
-    </p>
-    <p class="note"><em>Dari seseorang yang masih merindukanmu diam-diam 💌</em></p>
-    <br>
-    <button id="toPage2" class="btn">Sabtu, 18 Oktober 2025</button>
-  </div>
-</div>
+    <!-- Halaman 2 -->
+    <div class="container" id="page2" style="display:none; opacity:0;">
+        <div class="date-badge">Sabtu, 18 Oktober 2025</div>
+        <h2>Untuk Comellcu — Di Pelabuhan Sukarno Hatta</h2>
+        <p>
+            Jam satu dini hari,<br>
+            kau kirimkan fotomu dari Pelabuhan Sukarno Hatta,<br>
+            sementara aku masih terlelap,<br>
+            tak sempat menjawab sapamu.<br><br>
+            Pagi ini aku terbangun,
+            dan hal pertama yang kulihat adalah wajahmu
+            yang tersenyum di antara lampu-lampu pelabuhan.
+            Namun aku tahu, senyum itu juga menyimpan pesan diam:<br><br>
+            "Tunggulah aku."<br><br>
+            Maka aku menjawab dalam sunyi:<br><br>
+            <em>Demi Allah yang menjaga setiap ombak dan langkahmu,<br>
+            aku akan tetap di sini —<br>
+            menjagamu dalam doa,<br>
+            seperti pelabuhan menjaga kapal-kapal yang pulang.</em><br><br>
+            Berlayarlah, Comellcu.<br>
+            Jika rinduku tak mampu mengikutimu,<br>
+            biarlah Allah yang menjaga dari kejauhan.<br>
+            Dan andai waktu terasa lama,<br>
+            aku tak akan bertanya "Kapan?"<br><br>
+            Karena orang yang mencintai<br>
+            tidak menagih kepulangan —<br>
+            <strong>ia hanya menunggu.</strong>
+        </p>
+        <br>
+        <button id="toPage3" class="btn">Minggu, 19 Oktober 2025</button><br><br>
+        <button id="back1" class="btn btn-back">⬅️ Kembali</button>
+    </div>
 
-<!-- Halaman 2 -->
-<div class="container" id="page2" style="display:none; opacity:0;">
-  <h2>Sabtu, 18 Oktober 2025</h2>
-  <p><strong>Untuk Comellcu — Di Pelabuhan Sukarno Hatta</strong></p>
-  <p>
-    Jam satu dini hari,<br>
-    kau kirimkan fotomu dari Pelabuhan Sukarno Hatta,<br>
-    sementara aku masih terlelap,<br>
-    tak sempat menjawab sapamu.<br><br>
-    Pagi ini aku terbangun,
-    dan hal pertama yang kulihat adalah wajahmu
-    yang tersenyum di antara lampu-lampu pelabuhan.
-    Namun aku tahu, senyum itu juga menyimpan pesan diam:<br><br>
-    “Tunggulah aku.”<br><br>
-    Maka aku menjawab dalam sunyi:<br><br>
-    <em>Demi Allah yang menjaga setiap ombak dan langkahmu,<br>
-    aku akan tetap di sini —<br>
-    menjagamu dalam doa,<br>
-    seperti pelabuhan menjaga kapal-kapal yang pulang.</em><br><br>
-    Berlayarlah, Comellcu.<br>
-    Jika rinduku tak mampu mengikutimu,<br>
-    biarlah Allah yang menjaga dari kejauhan.<br>
-    Dan andai waktu terasa lama,<br>
-    aku tak akan bertanya “Kapan?”<br><br>
-    Karena orang yang mencintai<br>
-    tidak menagih kepulangan —<br>
-    <strong>ia hanya menunggu.</strong>
-  </p>
-  <br>
-  <button id="toPage3" class="btn">Minggu, 19 Oktober 2025</button><br><br>
-  <button id="back1" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
-</div>
+    <!-- Halaman 3 -->
+    <div class="container" id="page3" style="display:none; opacity:0;">
+        <div class="date-badge">Minggu, 19 Oktober 2025</div>
+        <h2>Dari Arteri ke Yogyakarta — dan Rindu yang Ikut Menyusul</h2>
+        <p>
+            Hari ini kau tiba di Yogyakarta,<br>
+            setelah perjalanan panjang:<br>
+            kapal dari Makassar ke Surabaya,<br>
+            kereta dari Surabaya menuju Jogja.<br><br>
+            Aku bisa membayangkan kau turun di stasiun Tugu,<br>
+            dikelilingi angin hangat khas kota pelajar.<br>
+            Mungkin setelah ini kau akan lewat Malioboro,<br>
+            atau duduk minum es teh di Tugu Jogja,<br>
+            atau sekadar jalan pelan sambil senyum—<br>
+            karena Jogja memang ramah pada orang yang jatuh cinta.<br><br>
+            Sementara aku…<br>
+            tidak ke mana-mana.<br>
+            Aku hanya kembali ke Arteri,<br>
+            beli Americano seperti biasa.<br>
+            Dan tanpa sadar, aku tetap melirik<br>
+            kursi penumpang sebelah,<br>
+            seolah-olah kau masih duduk di sana<br>
+            dengan kacamata tanpa kaca yang selalu kau banggakan.<br><br>
+            Padahal sejak tadi aku ingin bilang:<br><br>
+            "Jogja boleh membuatmu tambah cantik,<br>
+            tapi jangan lupa—<br>
+            ada seseorang di sini yang sudah jatuh duluan<br>
+            bahkan sebelum kau tiba di sana."<br><br>
+            Kopiku selesai dibuat.<br>
+            Tak ada yang perlu kutunggu,<br>
+            jadi aku langsung pulang.<br><br>
+            Karena ternyata,<br>
+            kopi terenak tetap terasa hambar<br>
+            kalau tidak ada kamu yang menertawakan pahitnya.<br><br>
+            Pergilah jelajahi Jogja sepuasmu, Comellcu.<br>
+            Kalau kangen sama Americano-mu,<br>
+            kau tahu jalan pulang.
+        </p>
+        <br>
+        <button id="toPage4" class="btn">Senin, 20 Oktober 2025</button><br><br>
+        <button id="back2" class="btn btn-back">⬅️ Kembali</button>
+    </div>
 
-<!-- Halaman 3 -->
-<div class="container" id="page3" style="display:none; opacity:0;">
-  <h2>Minggu, 19 Oktober 2025</h2>
-  <p><strong>Dari Arteri ke Yogyakarta — dan Rindu yang Ikut Menyusul</strong></p>
-  <p>
-    Hari ini kau tiba di Yogyakarta,<br>
-    setelah perjalanan panjang:<br>
-    kapal dari Makassar ke Surabaya,<br>
-    kereta dari Surabaya menuju Jogja.<br><br>
-    Aku bisa membayangkan kau turun di stasiun Tugu,<br>
-    dikelilingi angin hangat khas kota pelajar.<br>
-    Mungkin setelah ini kau akan lewat Malioboro,<br>
-    atau duduk minum es teh di Tugu Jogja,<br>
-    atau sekadar jalan pelan sambil senyum—<br>
-    karena Jogja memang ramah pada orang yang jatuh cinta.<br><br>
-    Sementara aku…<br>
-    tidak ke mana-mana.<br>
-    Aku hanya kembali ke Arteri,<br>
-    beli Americano seperti biasa.<br>
-    Dan tanpa sadar, aku tetap melirik<br>
-    kursi penumpang sebelah,<br>
-    seolah-olah kau masih duduk di sana<br>
-    dengan kacamata tanpa kaca yang selalu kau banggakan.<br><br>
-    Padahal sejak tadi aku ingin bilang:<br><br>
-    “Jogja boleh membuatmu tambah cantik,<br>
-    tapi jangan lupa—<br>
-    ada seseorang di sini yang sudah jatuh duluan<br>
-    bahkan sebelum kau tiba di sana.”<br><br>
-    Kopiku selesai dibuat.<br>
-    Tak ada yang perlu kutunggu,<br>
-    jadi aku langsung pulang.<br><br>
-    Karena ternyata,<br>
-    kopi terenak tetap terasa hambar<br>
-    kalau tidak ada kamu yang menertawakan pahitnya.<br><br>
-    Pergilah jelajahi Jogja sepuasmu, Comellcu.<br>
-    Kalau kangen sama Americano-mu,<br>
-    kau tahu jalan pulang.
-  </p>
-  <br>
-  <button id="toPage4" class="btn">Senin, 20 Oktober 2025</button><br><br>
-  <button id="back2" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
-</div>
+    <!-- Halaman 4 -->
+    <div class="container" id="page4" style="display:none; opacity:0;">
+        <div class="date-badge">Senin, 20 Oktober 2025</div>
+        <h2>Rindu yang Semakin Terasa</h2>
+        <p>
+            Hari ini 20 Oktober.<br>
+            Di Mamuju suhu 32 derajat,<br>
+            di Jogja katamu hanya 31.<br><br>
+            Lucu—karena panas sebenarnya tak pernah datang dari cuaca,<br>
+            tapi dari cara namamu berputar di kepalaku<br>
+            berulang kali tanpa izin.<br><br>
+            Kadang aku ingin protes pada jarak:<br>
+            apa perlu sejauh ini menahan sesuatu<br>
+            yang bahkan udara saja tak sanggup dinginkan?<br><br>
+            Andai rindu ini bisa kau rasa seperti aku,<br>
+            mungkin kau akan mengerti<br>
+            kenapa setiap kali kau muncul,<br>
+            aku tak lagi butuh kopi—<br>
+            karena jujur saja, yang kucari bukan lagi minuman dingin,<br>
+            tapi cara lain untuk menurunkan panas…<br><br>
+            mungkin percakapan larut malam denganmu,<br>
+            atau suara pelanmu sebelum tidur.<br><br>
+            Bagiku, kau tetap rumah yang tak pernah bisa kutinggali,<br>
+            tapi tetap selalu ingin kubuka pintunya—<br>
+            meski hanya untuk mencuri sedikit hangatmu,<br>
+            lalu pura-pura tak bersalah.
+        </p>
+        <br>
+        <button id="toPage5" class="btn">Selasa, 21 Oktober 2025</button><br><br>
+        <button id="back3" class="btn btn-back">⬅️ Kembali</button>
+    </div>
 
-<!-- Halaman 4 -->
-<div class="container" id="page4" style="display:none; opacity:0;">
-  <h2>Senin, 20 Oktober 2025</h2>
-  <p><strong>Rindu yang Semakin Terasa</strong></p>
-  <p>
-    Hari ini 20 Oktober.<br>
-    Di Mamuju suhu 32 derajat,<br>
-    di Jogja katamu hanya 31.<br><br>
-    Lucu—karena panas sebenarnya tak pernah datang dari cuaca,<br>
-    tapi dari cara namamu berputar di kepalaku<br>
-    berulang kali tanpa izin.<br><br>
-    Kadang aku ingin protes pada jarak:<br>
-    apa perlu sejauh ini menahan sesuatu<br>
-    yang bahkan udara saja tak sanggup dinginkan?<br><br>
-    Andai rindu ini bisa kau rasa seperti aku,<br>
-    mungkin kau akan mengerti<br>
-    kenapa setiap kali kau muncul,<br>
-    aku tak lagi butuh kopi—<br>
-    karena jujur saja, yang kucari bukan lagi minuman dingin,<br>
-    tapi cara lain untuk menurunkan panas…<br><br>
-    mungkin percakapan larut malam denganmu,<br>
-    atau suara pelanmu sebelum tidur.<br><br>
-    Bagiku, kau tetap rumah yang tak pernah bisa kutinggali,<br>
-    tapi tetap selalu ingin kubuka pintunya—<br>
-    meski hanya untuk mencuri sedikit hangatmu,<br>
-    lalu pura-pura tak bersalah.
-  </p>
-  <br>
-  <button id="toPage5" class="btn">Selasa, 21 Oktober 2025</button><br><br>
-  <button id="back3" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
-</div>
+    <!-- Halaman 5 -->
+    <div class="container" id="page5" style="display:none; opacity:0;">
+        <div class="date-badge">Selasa, 21 Oktober 2025</div>
+        <h2>Di Antara Wisuda dan Rindu</h2>
+        <p>
+            Hari ini kau di Jogja,<br>
+            berdiri di antara toga dan tepuk tangan di kampus Gadjah Mada —<br>
+            tempat ilmu dan sejarah saling berbisik tentang perjuangan.<br>
+            Adikmu naik ke panggung,<br>
+            dan aku tahu, senyummu hari ini pasti yang paling manis di ruangan itu.<br><br>
+            Aku di Mamuju,<br>
+            menonton dari jauh tanpa layar, tanpa suara,<br>
+            hanya lewat bayangan yang tersisa di kepalaku.<br>
+            Aku tak ingin mengganggu —<br>
+            biarlah hari ini jadi milikmu dan keluargamu,<br>
+            karena aku tahu, bahagiaku cukup dari bayanganmu yang tertawa.<br><br>
+            Lalu kau kirim satu foto,<br>
+            dan aku melihat matamu sedikit bengkak.<br>
+            Entah karena lelah, bahagia, atau rindu yang tak kau sebut.<br>
+            Ah, mungkin semalam kamu terlalu cantik di dalam mimpiku,<br>
+            sampai matamu ikut lelah menahan tatapan.<br><br>
+            Kalau boleh sedikit nakal,<br>
+            aku ingin bilang —<br>
+            biar saja matamu bengkak, asal jangan hatimu.<br>
+            Biar aku saja yang menanggung sesaknya,<br>
+            karena setiap kali kamu berkedip,<br>
+            ada sesuatu di dadaku yang ikut berdenyut pelan.<br><br>
+            Dan di sela keramaian wisuda itu,<br>
+            aku yakin Gajah Mada pun akan tersenyum,<br>
+            melihat dua orang yang masih berjuang menyatukan jarak<br>
+            lebih keras daripada ia dulu menyatukan nusantara.<br><br>
+            Jadi nikmatilah hari ini,<br>
+            dengan mata yang mungkin bengkak tapi tetap indah.<br>
+            Karena dari Mamuju,<br>
+            ada seseorang yang diam-diam iri pada udara Jogja —<br>
+            sebab ia bisa menyentuh pipimu,<br>
+            sementara aku hanya bisa menulis tentangnya.
+        </p>
+        <br>
+        <button id="toPage6" class="btn">Rabu, 22 Oktober 2025</button><br><br>
+        <button id="back4" class="btn btn-back">⬅️ Kembali</button>
+    </div>
 
-<!-- Halaman 5 -->
-<div class="container" id="page5" style="display:none; opacity:0;">
-  <h2>Selasa, 21 Oktober 2025</h2>
-  <p><strong>Di Antara Wisuda dan Rindu</strong></p>
-  <p>
-    Hari ini kau di Jogja,<br>
-    berdiri di antara toga dan tepuk tangan di kampus Gadjah Mada —<br>
-    tempat ilmu dan sejarah saling berbisik tentang perjuangan.<br>
-    Adikmu naik ke panggung,<br>
-    dan aku tahu, senyummu hari ini pasti yang paling manis di ruangan itu.<br><br>
-    Aku di Mamuju,<br>
-    menonton dari jauh tanpa layar, tanpa suara,<br>
-    hanya lewat bayangan yang tersisa di kepalaku.<br>
-    Aku tak ingin mengganggu —<br>
-    biarlah hari ini jadi milikmu dan keluargamu,<br>
-    karena aku tahu, bahagiaku cukup dari bayanganmu yang tertawa.<br><br>
-    Lalu kau kirim satu foto,<br>
-    dan aku melihat matamu sedikit bengkak.<br>
-    Entah karena lelah, bahagia, atau rindu yang tak kau sebut.<br>
-    Ah, mungkin semalam kamu terlalu cantik di dalam mimpiku,<br>
-    sampai matamu ikut lelah menahan tatapan.<br><br>
-    Kalau boleh sedikit nakal,<br>
-    aku ingin bilang —<br>
-    biar saja matamu bengkak, asal jangan hatimu.<br>
-    Biar aku saja yang menanggung sesaknya,<br>
-    karena setiap kali kamu berkedip,<br>
-    ada sesuatu di dadaku yang ikut berdenyut pelan.<br><br>
-    Dan di sela keramaian wisuda itu,<br>
-    aku yakin Gajah Mada pun akan tersenyum,<br>
-    melihat dua orang yang masih berjuang menyatukan jarak<br>
-    lebih keras daripada ia dulu menyatukan nusantara.<br><br>
-    Jadi nikmatilah hari ini,<br>
-    dengan mata yang mungkin bengkak tapi tetap indah.<br>
-    Karena dari Mamuju,<br>
-    ada seseorang yang diam-diam iri pada udara Jogja —<br>
-    sebab ia bisa menyentuh pipimu,<br>
-    sementara aku hanya bisa menulis tentangnya.
-  </p>
-   <br>
-  <button id="toPage5" class="btn">Rabu, 22 Oktober 2025</button><br><br>
-  <button id="back3" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
-</div>
-  <!-- Halaman 6 -->
-<div class="container" id="page6" style="display:none; opacity:0;">
-  <h2>Rabu, 22 Oktober 2025</h2>
-  <p><strong>Tidur Siang dan Sedikit Rindu</strong></p>
-  <p>
-    Hari ini aku nggak ke Arteri,<br>
-    nggak beli Americano,<br>
-    nggak juga lihat kursi penumpang sebelah.<br><br>
-    Cuma pulang dari kantor,<br>
-    rebahan siang dengan niat balas lelah.<br>
-    Tapi nyatanya,<br>
-    yang datang malah bayanganmu —<br>
-    pelan, tapi bandel,<br>
-    seperti aroma kopi yang nggak mau hilang dari baju.<br><br>
-    Mungkin kau masih di Jogja,<br>
-    jalan di sekitar Malioboro,<br>
-    atau duduk santai di Tugu,<br>
-    dan aku di sini cuma bisa membayangkan<br>
-    bagaimana kau terlihat di antara cahaya sore itu.<br><br>
-    Comellcu,<br>
-    kau memang pandai meninggalkan jarak,<br>
-    tapi kau lupa meninggalkan tenang di sini.<br><br>
-    Aku akhirnya tertidur juga,<br>
-    tapi cuma sebentar —<br>
-    karena jujur,<br>
-    tidur siang tanpa kau ganggu<br>
-    rasanya terlalu sepi.<br><br>
-    Jogja boleh memelukmu sekarang,<br>
-    tapi rinduku masih belum tahu cara berhenti mencarimu.<br><br>
-    Kadang aku pikir,<br>
-    apakah aku pantas merindukanmu sejauh ini —<br>
-    merindukan hal-hal kecil yang bahkan mungkin tak kau sadari?<br><br>
-    Seperti caramu membenarkan jilbab pelan sebelum turun dari mobil,<br>
-    atau tatapan singkat yang kau lempar waktu tahu aku diam memperhatikan.<br><br>
-    Aku tahu, aku bukan siapa-siapamu,<br>
-    tapi anehnya, tiap kali aku coba berhenti,<br>
-    rindu ini malah makin pandai mencari alasan untuk hidup.<br><br>
-    Mungkin memang begini caranya semesta menggoda:<br>
-    kau dikirim bukan untuk dimiliki,<br>
-    tapi untuk membuatku belajar<br>
-    betapa nikmatnya menyimpan rahasia kecil<br>
-    yang bahkan tak pernah benar-benar kau beri.<br><br>
-    Dan lucunya,<br>
-    semakin aku sadar kau tak bisa kumiliki,<br>
-    semakin aku ingin kau tahu<br>
-    bahwa setiap kali aku menutup mata —<br>
-    yang paling sering lewat bukan doa,<br>
-    tapi bayanganmu...<br>
-    yang terlalu manis untuk disebut dosa,<br>
-    tapi terlalu hangat untuk disebut biasa.
-  </p>
-   <br>
-  <button id="toPage5" class="btn">Kamis, 23 Oktober 2025</button><br><br>
-  <button id="back3" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
-</div>
-  <!-- Halaman 7 -->
-<div class="container" id="page7" style="display:none; opacity:0;">
-  <h2>Kamis, 23 Oktober 2025</h2>
-  <p><strong>Aku Tidak Mencarimu, Tapi Semesta Terlalu Ramai Membicarakanmu</strong></p>
-  <p>
-    Aku tidak mencarimu hari ini,<br>
-    tapi semua hal seolah bersekongkol.<br>
-    Bau hujan di Mamuju menyerupai uap jamu dari Raminten,<br>
-    dan papan kayu Batik Lokwon tiba-tiba muncul di pikiranku,<br>
-    seperti kenangan yang menolak dibungkus rapi.<br><br>
-    Kau di Jogja, mungkin sedang tersenyum di tengah lampu yang lembut,<br>
-    dan aku, seperti orang kalah yang pura-pura sibuk,<br>
-    membaca laporan kerja dengan kepala yang penuh nama yang tak disebut.<br><br>
-    Kadang aku pikir Tuhan terlalu lucu —<br>
-    memberi jarak supaya aku belajar tenang,<br>
-    tapi mengizinkan semua hal kecil mengingatkanku padamu.<br><br>
-    Aku tahu kau tidak sengaja menatap kamera<br>
-    seperti waktu kita duduk di mobil sambil bercanda,<br>
-    tapi foto itu membuatku berhenti beberapa detik,<br>
-    seolah dunia ikut menahan napas.<br><br>
-    Aku mencoba menertawakan diri sendiri —<br>
-    betapa mudahnya aku kalah oleh sesuatu<br>
-    yang bahkan tidak pernah dijanjikan.<br><br>
-    Tapi mungkin begitulah cinta yang tidak dimiliki:<br>
-    ia tidak butuh alasan untuk tinggal,<br>
-    cukup satu kenangan kecil,<br>
-    lalu ia betah menetap di kepala selama berhari-hari.<br><br>
-    Malam ini aku menulis lagi,<br>
-    tanpa tahu untuk siapa sebenarnya kata-kata ini.<br>
-    Mungkin untukmu,<br>
-    mungkin untuk rinduku yang tidak tahu arah pulang.<br><br>
-    Tapi kalau suatu hari nanti kau membaca ini,<br>
-    jangan salah paham —<br>
-    aku tidak sedang memintamu kembali,<br>
-    aku hanya sedang mengucapkan terima kasih<br>
-    karena pernah membuat hujan di Mamuju terasa seperti Jogja.
-  </p>
-  <br>
-  <a href="https://wa.me/6285756047187?text=Aku%20baca%20pesanmu,%20dan%20aku%20tersenyum%20💌" target="_blank" class="btn">Balas Pesan 💌</a><br><br>
-  <button id="back6" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
-</div>
+    <!-- Halaman 6 -->
+    <div class="container" id="page6" style="display:none; opacity:0;">
+        <div class="date-badge">Rabu, 22 Oktober 2025</div>
+        <h2>Tidur Siang dan Sedikit Rindu</h2>
+        <p>
+            Hari ini aku nggak ke Arteri,<br>
+            nggak beli Americano,<br>
+            nggak juga lihat kursi penumpang sebelah.<br><br>
+            Cuma pulang dari kantor,<br>
+            rebahan siang dengan niat balas lelah.<br>
+            Tapi nyatanya,<br>
+            yang datang malah bayanganmu —<br>
+            pelan, tapi bandel,<br>
+            seperti aroma kopi yang nggak mau hilang dari baju.<br><br>
+            Mungkin kau masih di Jogja,<br>
+            jalan di sekitar Malioboro,<br>
+            atau duduk santai di Tugu,<br>
+            dan aku di sini cuma bisa membayangkan<br>
+            bagaimana kau terlihat di antara cahaya sore itu.<br><br>
+            Comellcu,<br>
+            kau memang pandai meninggalkan jarak,<br>
+            tapi kau lupa meninggalkan tenang di sini.<br><br>
+            Aku akhirnya tertidur juga,<br>
+            tapi cuma sebentar —<br>
+            karena jujur,<br>
+            tidur siang tanpa kau ganggu<br>
+            rasanya terlalu sepi.<br><br>
+            Jogja boleh memelukmu sekarang,<br>
+            tapi rinduku masih belum tahu cara berhenti mencarimu.<br><br>
+            Kadang aku pikir,<br>
+            apakah aku pantas merindukanmu sejauh ini —<br>
+            merindukan hal-hal kecil yang bahkan mungkin tak kau sadari?<br><br>
+            Seperti caramu membenarkan jilbab pelan sebelum turun dari mobil,<br>
+            atau tatapan singkat yang kau lempar waktu tahu aku diam memperhatikan.<br><br>
+            Aku tahu, aku bukan siapa-siapamu,<br>
+            tapi anehnya, tiap kali aku coba berhenti,<br>
+            rindu ini malah makin pandai mencari alasan untuk hidup.<br><br>
+            Mungkin memang begini caranya semesta menggoda:<br>
+            kau dikirim bukan untuk dimiliki,<br>
+            tapi untuk membuatku belajar<br>
+            betapa nikmatnya menyimpan rahasia kecil<br>
+            yang bahkan tak pernah benar-benar kau beri.<br><br>
+            Dan lucunya,<br>
+            semakin aku sadar kau tak bisa kumiliki,<br>
+            semakin aku ingin kau tahu<br>
+            bahwa setiap kali aku menutup mata —<br>
+            yang paling sering lewat bukan doa,<br>
+            tapi bayanganmu...<br>
+            yang terlalu manis untuk disebut dosa,<br>
+            tapi terlalu hangat untuk disebut biasa.
+        </p>
+        <br>
+        <button id="toPage7" class="btn">Kamis, 23 Oktober 2025</button><br><br>
+        <button id="back5" class="btn btn-back">⬅️ Kembali</button>
+    </div>
 
-<!-- Musik -->
-<audio id="musik" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/04/12/audio_8ec9b1bb38.mp3?filename=romantic-piano-14751.mp3" type="audio/mpeg">
-</audio>
-<button id="toggleMusic" class="music-btn" title="Hidupkan / Matikan Musik">🎵</button>
+    <!-- Halaman 7 -->
+    <div class="container" id="page7" style="display:none; opacity:0;">
+        <div class="date-badge">Kamis, 23 Oktober 2025</div>
+        <h2>Jogja, dan Aku yang Tidak Sepenuhnya Diam</h2>
+        <p>
+            Aku lihat kau di Batik Lokwon —<br>
+            terlalu manis untuk hanya disebut "kebetulan lewat".<br>
+            Aku hafal caramu berdiri,<br>
+            satu tangan di tas, satu lagi sibuk menepuk jilbab,<br>
+            seolah sedang menyembunyikan gugup yang hanya aku yang tahu.<br><br>
+            Di Raminten, kau menunduk pada cangkir jamu,<br>
+            dan entah kenapa aku merasa iri pada uap hangat yang mencium wajahmu lebih dulu.<br>
+            Lucu, ya?<br>
+            Kau mungkin tidak sadar, tapi bahkan caramu memegang gelas<br>
+            sudah cukup untuk membuat satu kota di barat kehilangan fokus kerja.<br><br>
+            Hujan turun di Mamuju, tapi yang basah justru pikiranku.<br>
+            Karena setiap tetesnya mengulang satu pertanyaan bodoh:<br>
+            "Apa aku masih boleh merindukanmu?"<br><br>
+            Kau tampak bahagia di Jogja,<br>
+            dan aku tidak ingin mengganggu.<br>
+            Tapi keheningan ini seperti permainan berbahaya —<br>
+            semakin aku tidak menyapa, semakin aku ingin kau merasa dicari.<br><br>
+            Aku tahu batas, tapi rindu tidak.<br>
+            Ia menyalakan lampu kecil di dadaku,<br>
+            dan setiap kali aku coba memadamkannya,<br>
+            kau muncul lagi — lewat cahaya layar,<br>
+            lewat tawa di video singkat yang tak sengaja kulihat berkali-kali.<br><br>
+            Kau mungkin pikir aku sudah tenang.<br>
+            Tapi kalau kau bisa mendengar isi kepalaku malam ini,<br>
+            kau akan tahu:<br>
+            yang paling nakal dari rindu bukan keinginan,<br>
+            melainkan kesabaran yang pura-pura suci.<br><br>
+            Jadi biarlah,<br>
+            kau terus di Jogja, berjalan di Malioboro,<br>
+            membiarkan lampu kota menyanjungmu seperti langit memuji bulan.<br>
+            Dan aku di sini —<br>
+            menunggu hujan berhenti hanya untuk membayangkan,<br>
+            bagaimana rasanya kalau aku ada di sampingmu,<br>
+            dan cukup berani bilang:<br>
+            "Kau tahu? Aku sudah berhenti mencoba melupakanmu. Sekarang aku hanya menunggu kau sadar."
+        </p>
+        <br>
+        <a href="https://wa.me/6285756047187?text=Aku%20baca%20pesanmu,%20dan%20aku%20tersenyum%20💌" target="_blank" class="btn">
+            <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>Balas Pesan 💌
+        </a><br><br>
+        <button id="back6" class="btn btn-back">⬅️ Kembali</button>
+    </div>
 
-<script>
-const hearts = document.getElementById('hearts');
-for (let i = 0; i < 12; i++) {
-  const h = document.createElement('div');
-  h.className = 'heart';
-  h.style.left = Math.random() * 100 + '%';
-  h.style.animationDuration = (6 + Math.random() * 6) + 's';
-  h.style.animationDelay = (Math.random() * 3) + 's';
-  hearts.appendChild(h);
-}
+    <!-- Musik -->
+    <audio id="musik" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2023/04/12/audio_8ec9b1bb38.mp3?filename=romantic-piano-14751.mp3" type="audio/mpeg">
+    </audio>
+    <button id="toggleMusic" class="music-btn" title="Hidupkan / Matikan Musik">
+        <i class="fas fa-music"></i>
+    </button>
 
-const musik = document.getElementById('musik');
-const toggle = document.getElementById('toggleMusic');
-let isPlaying = false;
+    <script>
+        const hearts = document.getElementById('hearts');
+        for (let i = 0; i < 15; i++) {
+            const h = document.createElement('div');
+            h.className = 'heart';
+            h.style.left = Math.random() * 100 + '%';
+            h.style.animationDuration = (6 + Math.random() * 6) + 's';
+            h.style.animationDelay = (Math.random() * 3) + 's';
+            hearts.appendChild(h);
+        }
 
-// ====== Elemen Halaman ======
-const intro  = document.getElementById('intro');
-const puisi1 = document.getElementById('puisi1');
+        const musik = document.getElementById('musik');
+        const toggle = document.getElementById('toggleMusic');
+        let isPlaying = false;
 
-const page1 = document.getElementById('page1');
-const page2 = document.getElementById('page2');
-const page3 = document.getElementById('page3');
-const page4 = document.getElementById('page4');
-const page5 = document.getElementById('page5');
-const page6 = document.getElementById('page6');
-const page7 = document.getElementById('page7');
+        // ====== Elemen Halaman ======
+        const intro  = document.getElementById('intro');
+        const puisi1 = document.getElementById('puisi1');
 
-// ====== Tombol Navigasi Tiap Halaman ======
-const lihat  = document.getElementById('lihat');
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const page3 = document.getElementById('page3');
+        const page4 = document.getElementById('page4');
+        const page5 = document.getElementById('page5');
+        const page6 = document.getElementById('page6');
+        const page7 = document.getElementById('page7');
 
-const toPage2 = document.getElementById('toPage2');
-const toPage3 = document.getElementById('toPage3');
-const toPage4 = document.getElementById('toPage4');
-const toPage5 = document.getElementById('toPage5');
+        // ====== Tombol Navigasi Tiap Halaman ======
+        const lihat  = document.getElementById('lihat');
 
-const back1 = document.getElementById('back1');
-const back2 = document.getElementById('back2');
-const back3 = document.getElementById('back3');
-const back4 = document.getElementById('back4');
-const back5 = document.getElementById('back5');
-const back6 = document.getElementById('back6');
+        const toPage2 = document.getElementById('toPage2');
+        const toPage3 = document.getElementById('toPage3');
+        const toPage4 = document.getElementById('toPage4');
+        const toPage5 = document.getElementById('toPage5');
+        const toPage6 = document.getElementById('toPage6');
+        const toPage7 = document.getElementById('toPage7');
 
-// ====== Tambahan Halaman Dinamis ======
-// Tombol ke halaman 6 (dibuat manual lewat JS)
-const toPage6 = document.createElement('button');
-toPage6.id = 'toPage6';
-toPage6.className = 'btn';
-toPage6.textContent = 'Selasa, 22 Oktober 2025';
-page5.appendChild(toPage6);
+        const back1 = document.getElementById('back1');
+        const back2 = document.getElementById('back2');
+        const back3 = document.getElementById('back3');
+        const back4 = document.getElementById('back4');
+        const back5 = document.getElementById('back5');
+        const back6 = document.getElementById('back6');
 
-// Tombol ke halaman 7 (dibuat manual lewat JS)
-const toPage7 = document.createElement('button');
-toPage7.id = 'toPage7';
-toPage7.className = 'btn';
-toPage7.textContent = 'Kamis, 23 Oktober 2025';
-page6.appendChild(toPage7);
+        // ====== Aksi Navigasi Halaman ======
+        toPage2.onclick = () => fadeTo(page1, page2);
+        toPage3.onclick = () => fadeTo(page2, page3);
+        toPage4.onclick = () => fadeTo(page3, page4);
+        toPage5.onclick = () => fadeTo(page4, page5);
+        toPage6.onclick = () => fadeTo(page5, page6);
+        toPage7.onclick = () => fadeTo(page6, page7);
 
-// ====== Aksi Navigasi Halaman ======
-toPage2.onclick = () => fadeTo(page1, page2);
-toPage3.onclick = () => fadeTo(page2, page3);
-toPage4.onclick = () => fadeTo(page3, page4);
-toPage5.onclick = () => fadeTo(page4, page5);
-toPage6.onclick = () => fadeTo(page5, page6);
-toPage7.onclick = () => fadeTo(page6, page7);
+        back1.onclick = () => fadeTo(page2, page1);
+        back2.onclick = () => fadeTo(page3, page2);
+        back3.onclick = () => fadeTo(page4, page3);
+        back4.onclick = () => fadeTo(page5, page4);
+        back5.onclick = () => fadeTo(page6, page5);
+        back6.onclick = () => fadeTo(page7, page6);
 
-back1.onclick = () => fadeTo(page2, page1);
-back2.onclick = () => fadeTo(page3, page2);
-back3.onclick = () => fadeTo(page4, page3);
-back4.onclick = () => fadeTo(page5, page4);
-back5.onclick = () => fadeTo(page6, page5);
-back6.onclick = () => fadeTo(page7, page6);
+        lihat.onclick = () => {
+            intro.style.display = 'none';
+            puisi1.classList.add('visible');
+            musik.volume = 0.5;
+            musik.play().then(() => isPlaying = true)
+            .catch(() => alert("Klik tombol 🎵 di pojok kanan bawah untuk memutar musik 💖"));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
 
-lihat.onclick = () => {
-  intro.style.display = 'none';
-  puisi1.classList.add('visible');
-  musik.volume = 0.5;
-  musik.play().then(() => isPlaying = true)
-  .catch(() => alert("Klik tombol 🎵 di pojok kanan bawah untuk memutar musik 💖"));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+        const fadeTo = (from, to) => {
+            from.style.opacity = 0;
+            setTimeout(() => {
+                from.style.display = 'none';
+                to.style.display = 'block';
+                setTimeout(() => to.style.opacity = 1, 50);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 600);
+        };
 
-const fadeTo = (from, to) => {
-  from.style.opacity = 0;
-  setTimeout(() => {
-    from.style.display = 'none';
-    to.style.display = 'block';
-    setTimeout(() => to.style.opacity = 1, 50);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 600);
-};
-
-toPage2.onclick = () => fadeTo(page1, page2);
-back1.onclick = () => fadeTo(page2, page1);
-toPage3.onclick = () => fadeTo(page2, page3);
-back2.onclick = () => fadeTo(page3, page2);
-toPage4.onclick = () => fadeTo(page3, page4);
-back3.onclick = () => fadeTo(page4, page3);
-toPage5.onclick = () => fadeTo(page4, page5);
-back4.onclick = () => fadeTo(page5, page4);
-
-toggle.onclick = () => {
-  if (isPlaying) { musik.pause(); toggle.textContent = '🔇'; }
-  else { musik.play(); toggle.textContent = '🎵'; }
-  isPlaying = !isPlaying;
-};
-</script>
+        toggle.onclick = () => {
+            if (isPlaying) { 
+                musik.pause(); 
+                toggle.innerHTML = '<i class="fas fa-volume-mute"></i>'; 
+            }
+            else { 
+                musik.play(); 
+                toggle.innerHTML = '<i class="fas fa-music"></i>'; 
+            }
+            isPlaying = !isPlaying;
+        };
+    </script>
 </body>
 </html>
