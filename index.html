@@ -279,10 +279,10 @@ h2 { color: #5b2b4a; }
     sebab ia bisa menyentuh pipimu,<br>
     sementara aku hanya bisa menulis tentangnya.
   </p>
-  <br>
-  <button id="back4" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
+   <br>
+  <button id="toPage5" class="btn">Rabu, 22 Oktober 2025</button><br><br>
+  <button id="back3" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
 </div>
-
   <!-- Halaman 6 -->
 <div class="container" id="page6" style="display:none; opacity:0;">
   <h2>Rabu, 22 Oktober 2025</h2>
@@ -334,9 +334,50 @@ h2 { color: #5b2b4a; }
     yang terlalu manis untuk disebut dosa,<br>
     tapi terlalu hangat untuk disebut biasa.
   </p>
+   <br>
+  <button id="toPage5" class="btn">Kamis, 23 Oktober 2025</button><br><br>
+  <button id="back3" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
+</div>
+  <!-- Halaman 7 -->
+<div class="container" id="page7" style="display:none; opacity:0;">
+  <h2>Kamis, 23 Oktober 2025</h2>
+  <p><strong>Aku Tidak Mencarimu, Tapi Semesta Terlalu Ramai Membicarakanmu</strong></p>
+  <p>
+    Aku tidak mencarimu hari ini,<br>
+    tapi semua hal seolah bersekongkol.<br>
+    Bau hujan di Mamuju menyerupai uap jamu dari Raminten,<br>
+    dan papan kayu Batik Lokwon tiba-tiba muncul di pikiranku,<br>
+    seperti kenangan yang menolak dibungkus rapi.<br><br>
+    Kau di Jogja, mungkin sedang tersenyum di tengah lampu yang lembut,<br>
+    dan aku, seperti orang kalah yang pura-pura sibuk,<br>
+    membaca laporan kerja dengan kepala yang penuh nama yang tak disebut.<br><br>
+    Kadang aku pikir Tuhan terlalu lucu —<br>
+    memberi jarak supaya aku belajar tenang,<br>
+    tapi mengizinkan semua hal kecil mengingatkanku padamu.<br><br>
+    Aku tahu kau tidak sengaja menatap kamera<br>
+    seperti waktu kita duduk di mobil sambil bercanda,<br>
+    tapi foto itu membuatku berhenti beberapa detik,<br>
+    seolah dunia ikut menahan napas.<br><br>
+    Aku mencoba menertawakan diri sendiri —<br>
+    betapa mudahnya aku kalah oleh sesuatu<br>
+    yang bahkan tidak pernah dijanjikan.<br><br>
+    Tapi mungkin begitulah cinta yang tidak dimiliki:<br>
+    ia tidak butuh alasan untuk tinggal,<br>
+    cukup satu kenangan kecil,<br>
+    lalu ia betah menetap di kepala selama berhari-hari.<br><br>
+    Malam ini aku menulis lagi,<br>
+    tanpa tahu untuk siapa sebenarnya kata-kata ini.<br>
+    Mungkin untukmu,<br>
+    mungkin untuk rinduku yang tidak tahu arah pulang.<br><br>
+    Tapi kalau suatu hari nanti kau membaca ini,<br>
+    jangan salah paham —<br>
+    aku tidak sedang memintamu kembali,<br>
+    aku hanya sedang mengucapkan terima kasih<br>
+    karena pernah membuat hujan di Mamuju terasa seperti Jogja.
+  </p>
   <br>
-   <a href="https://wa.me/6285756047187?text=Hai,%20aku%20juga%20rindu%20💌" target="_blank" class="btn">Kirim Pesan di WhatsApp 💖</a><br><br>
-  <button id="back5" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
+  <a href="https://wa.me/6285756047187?text=Aku%20baca%20pesanmu,%20dan%20aku%20tersenyum%20💌" target="_blank" class="btn">Balas Pesan 💌</a><br><br>
+  <button id="back6" class="btn" style="background:linear-gradient(180deg,#999,#555);">⬅️ Kembali</button>
 </div>
 
 <!-- Musik -->
@@ -382,13 +423,17 @@ const back4 = document.getElementById('back4');
 const page6 = document.getElementById('page6');
 const back5 = document.getElementById('back5');
 const toPage6 = document.createElement('button');
-toPage6.id = 'toPage6';
-toPage6.className = 'btn';
-toPage6.textContent = 'Rabu, 22 Oktober 2025';
-page5.appendChild(toPage6);
+const page7 = document.getElementById('page7');
+const back6 = document.getElementById('back6');
+const toPage7 = document.createElement('button');
+toPage7.id = 'toPage7';
+toPage7.className = 'btn';
+toPage7.textContent = 'Kamis, 23 Oktober 2025';
+page6.appendChild(toPage7);
 
-toPage6.onclick = () => fadeTo(page5, page6);
-back5.onclick = () => fadeTo(page6, page5);
+toPage7.onclick = () => fadeTo(page6, page7);
+back6.onclick = () => fadeTo(page7, page6);
+
 
 
 lihat.onclick = () => {
