@@ -619,7 +619,7 @@
 
     <!-- Musik -->
     <audio id="musik" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2023/04/12/audio_8ec9b1bb38.mp3?filename=romantic-piano-14751.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_7bdc845d0c.mp3?filename=romantic-piano-soft-melody-141970.mp3" type="audio/mpeg">
     </audio>
     <button id="toggleMusic" class="music-btn" title="Hidupkan / Matikan Musik">
         <i class="fas fa-music"></i>
@@ -689,12 +689,49 @@
         back6.onclick = () => fadeTo(page7, page6);
         back7.onclick = () => fadeTo(page8, page7); // Kembali dari halaman baru
 
+        // ====== MUSIK OTOMATIS DIPUTAR ======
+        window.addEventListener('DOMContentLoaded', () => {
+            // Coba putar musik otomatis saat halaman dimuat
+            musik.volume = 0.4;
+            const playPromise = musik.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Musik berhasil diputar
+                    isPlaying = true;
+                    toggle.innerHTML = '<i class="fas fa-music"></i>';
+                }).catch(error => {
+                    // Musik tidak bisa diputar otomatis
+                    console.log("Musik tidak bisa diputar otomatis:", error);
+                    isPlaying = false;
+                    toggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                    
+                    // Tampilkan pesan untuk pengguna
+                    const musicAlert = document.createElement('div');
+                    musicAlert.innerHTML = `
+                        <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
+                        background: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 50px; 
+                        box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000; font-size: 0.9rem;
+                        border: 1px solid #ffc2e0;">
+                            <i class="fas fa-music" style="margin-right: 8px; color: #ff66a3;"></i>
+                            Klik tombol musik di pojok kanan bawah untuk memutar musik romantis
+                        </div>
+                    `;
+                    document.body.appendChild(musicAlert);
+                    
+                    // Hapus pesan setelah 5 detik
+                    setTimeout(() => {
+                        if (musicAlert.parentNode) {
+                            musicAlert.parentNode.removeChild(musicAlert);
+                        }
+                    }, 5000);
+                });
+            }
+        });
+
         lihat.onclick = () => {
             intro.style.display = 'none';
             puisi1.classList.add('visible');
-            musik.volume = 0.5;
-            musik.play().then(() => isPlaying = true)
-            .catch(() => alert("Klik tombol 🎵 di pojok kanan bawah untuk memutar musik 💖"));
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
@@ -714,8 +751,11 @@
                 toggle.innerHTML = '<i class="fas fa-volume-mute"></i>'; 
             }
             else { 
-                musik.play(); 
-                toggle.innerHTML = '<i class="fas fa-music"></i>'; 
+                musik.play().then(() => {
+                    toggle.innerHTML = '<i class="fas fa-music"></i>'; 
+                }).catch(error => {
+                    console.log("Gagal memutar musik:", error);
+                });
             }
             isPlaying = !isPlaying;
         };
