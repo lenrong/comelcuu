@@ -565,10 +565,56 @@
             "Kau tahu? Aku sudah berhenti mencoba melupakanmu. Sekarang aku hanya menunggu kau sadar."
         </p>
         <br>
+        <button id="toPage8" class="btn">Jumat, 24 Oktober 2025</button><br><br>
+        <button id="back6" class="btn btn-back">⬅️ Kembali</button>
+    </div>
+
+    <!-- Halaman 8 - Halaman Baru -->
+    <div class="container" id="page8" style="display:none; opacity:0;">
+        <div class="date-badge">Jumat, 24 Oktober 2025</div>
+        <h2>Kau Belum Pulang Sepenuhnya</h2>
+        <p>
+            Hari ini aku tidak ke mana-mana,<br>
+            tapi pikiranku berjalan jauh —<br>
+            melewati laut yang dulu kau seberangi,<br>
+            dan berhenti di langit Makassar,<br>
+            tempat kau singgah untuk istirahat.<br><br>
+            Aku tidak menulis apa pun padamu,<br>
+            biarkan Jogja jadi cerita yang masih hangat di pundakmu,<br>
+            biarkan Makassar menyentuh rambutmu dengan anginnya sendiri.<br>
+            Aku hanya ingin tahu —<br>
+            apakah ada satu detik di antara perjalananmu<br>
+            yang diam-diam menyebut namaku tanpa sengaja?<br><br>
+            Aku tidak ingin mengganggu.<br>
+            Tapi setiap kali kulihat awan bergerak ke barat,<br>
+            ada bagian dalam diriku yang bertanya —<br>
+            apakah rindu juga bisa menumpang di sayap pesawat?<br><br>
+            Kau tahu, yang paling sulit dari menahan diri<br>
+            adalah ketika aku sadar,<br>
+            aku tidak punya hak untuk menunggu,<br>
+            tapi tetap melakukannya.<br><br>
+            Dan mungkin,<br>
+            rindu ini bukan tentang memiliki,<br>
+            tapi tentang seberapa jauh seseorang bisa tetap merasa dekat,<br>
+            tanpa menyentuh, tanpa bicara.<br><br>
+            Kadang aku berpikir,<br>
+            mungkin aku terlalu berani untuk diam,<br>
+            atau terlalu pengecut untuk jujur.<br><br>
+            Entahlah, Comellcu —<br>
+            yang kutahu, bahkan diam bisa jadi doa,<br>
+            dan rinduku sudah hafal langkahmu<br>
+            tanpa perlu peta.<br><br>
+            Jadi malam ini aku biarkan hujan bekerja,<br>
+            membasuh yang tidak bisa kuucapkan.<br>
+            Dan di antara setiap tetesnya,<br>
+            aku bisikkan pertanyaan yang belum sempat jadi kalimat:<br><br>
+            <strong>Kapan kau pulang sepenuhnya?</strong>
+        </p>
+        <br>
         <a href="https://wa.me/6285756047187?text=Aku%20baca%20pesanmu,%20dan%20aku%20tersenyum%20💌" target="_blank" class="btn">
             <i class="fab fa-whatsapp" style="margin-right: 8px;"></i>Balas Pesan 💌
         </a><br><br>
-        <button id="back6" class="btn btn-back">⬅️ Kembali</button>
+        <button id="back7" class="btn btn-back">⬅️ Kembali</button>
     </div>
 
     <!-- Musik -->
@@ -605,6 +651,7 @@
         const page5 = document.getElementById('page5');
         const page6 = document.getElementById('page6');
         const page7 = document.getElementById('page7');
+        const page8 = document.getElementById('page8'); // Halaman baru
 
         // ====== Tombol Navigasi Tiap Halaman ======
         const lihat  = document.getElementById('lihat');
@@ -615,6 +662,7 @@
         const toPage5 = document.getElementById('toPage5');
         const toPage6 = document.getElementById('toPage6');
         const toPage7 = document.getElementById('toPage7');
+        const toPage8 = document.getElementById('toPage8'); // Tombol ke halaman baru
 
         const back1 = document.getElementById('back1');
         const back2 = document.getElementById('back2');
@@ -622,6 +670,7 @@
         const back4 = document.getElementById('back4');
         const back5 = document.getElementById('back5');
         const back6 = document.getElementById('back6');
+        const back7 = document.getElementById('back7'); // Tombol kembali dari halaman baru
 
         // ====== Aksi Navigasi Halaman ======
         toPage2.onclick = () => fadeTo(page1, page2);
@@ -630,6 +679,7 @@
         toPage5.onclick = () => fadeTo(page4, page5);
         toPage6.onclick = () => fadeTo(page5, page6);
         toPage7.onclick = () => fadeTo(page6, page7);
+        toPage8.onclick = () => fadeTo(page7, page8); // Navigasi ke halaman baru
 
         back1.onclick = () => fadeTo(page2, page1);
         back2.onclick = () => fadeTo(page3, page2);
@@ -637,6 +687,7 @@
         back4.onclick = () => fadeTo(page5, page4);
         back5.onclick = () => fadeTo(page6, page5);
         back6.onclick = () => fadeTo(page7, page6);
+        back7.onclick = () => fadeTo(page8, page7); // Kembali dari halaman baru
 
         lihat.onclick = () => {
             intro.style.display = 'none';
