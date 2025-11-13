@@ -247,6 +247,88 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* Styles untuk modal password */
+        .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 245, 248, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+        
+        .password-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.2);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+        
+        .password-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #ff9ec5, #ff66a3, #ff9ec5);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .password-container h2 {
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .password-container p {
+            color: var(--muted);
+            margin-bottom: 25px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--medium-pink);
+            border-radius: 50px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .password-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(255, 102, 163, 0.2);
+        }
+        
+        .password-error {
+            color: #ff4757;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .private-note {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--medium-pink);
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        
         @media (max-width: 480px) {
             .container { 
                 padding: 20px; 
@@ -269,10 +351,44 @@
             body {
                 padding: 16px;
             }
+            
+            .password-container {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Modal Password -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-container">
+            <div class="flower-decoration flower-1">
+                <i class="fas fa-heart" style="font-size: 80px; color: #ff66a3;"></i>
+            </div>
+            <div class="flower-decoration flower-2">
+                <i class="fas fa-heart" style="font-size: 80px; color: #ff66a3;"></i>
+            </div>
+            
+            <h2><i class="fas fa-lock" style="margin-right: 10px;"></i>Akses Terbatas</h2>
+            <p>Halaman ini telah diprivat dan hanya dapat diakses dengan izin khusus.</p>
+            
+            <input type="password" class="password-input" id="passwordInput" placeholder="Masukkan kode akses...">
+            <button class="btn" id="submitPassword">
+                <i class="fas fa-key" style="margin-right: 8px;"></i>Buka Pesan
+            </button>
+            
+            <div class="password-error" id="passwordError">
+                <i class="fas fa-exclamation-circle" style="margin-right: 5px;"></i>
+                Kode akses salah. Silakan coba lagi.
+            </div>
+            
+            <div class="private-note">
+                <p><i class="fas fa-info-circle" style="margin-right: 5px;"></i>
+                Untuk mendapatkan akses, hubungi <strong>@lenrong</strong></p>
+            </div>
+        </div>
+    </div>
+    
     <div class="hearts" id="hearts"></div>
     
     <!-- Halaman 1 -->
@@ -626,6 +742,48 @@
     </button>
 
     <script>
+        // ====== SISTEM PASSWORD ======
+        const passwordModal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+        const submitPassword = document.getElementById('submitPassword');
+        const passwordError = document.getElementById('passwordError');
+        const correctPassword = "kjiytehe639HHjjksdooooo0000gh";
+        
+        // Cek apakah password sudah disimpan di localStorage
+        if (localStorage.getItem('passwordVerified') === 'true') {
+            passwordModal.style.display = 'none';
+        }
+        
+        submitPassword.addEventListener('click', checkPassword);
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        function checkPassword() {
+            if (passwordInput.value === correctPassword) {
+                // Password benar
+                localStorage.setItem('passwordVerified', 'true');
+                passwordModal.style.opacity = '0';
+                setTimeout(() => {
+                    passwordModal.style.display = 'none';
+                }, 500);
+                
+                // Mulai musik
+                playMusic();
+            } else {
+                // Password salah
+                passwordError.style.display = 'block';
+                passwordInput.style.borderColor = '#ff4757';
+                setTimeout(() => {
+                    passwordError.style.display = 'none';
+                    passwordInput.style.borderColor = 'var(--medium-pink)';
+                }, 3000);
+            }
+        }
+        
+        // ====== ANIMASI HATI ======
         const hearts = document.getElementById('hearts');
         for (let i = 0; i < 15; i++) {
             const h = document.createElement('div');
@@ -636,9 +794,26 @@
             hearts.appendChild(h);
         }
 
+        // ====== MUSIK ======
         const musik = document.getElementById('musik');
         const toggle = document.getElementById('toggleMusic');
         let isPlaying = false;
+
+        function playMusic() {
+            musik.volume = 0.4;
+            const playPromise = musik.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    toggle.innerHTML = '<i class="fas fa-music"></i>';
+                }).catch(error => {
+                    console.log("Musik tidak bisa diputar otomatis:", error);
+                    isPlaying = false;
+                    toggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                });
+            }
+        }
 
         // ====== Elemen Halaman ======
         const intro  = document.getElementById('intro');
@@ -651,7 +826,7 @@
         const page5 = document.getElementById('page5');
         const page6 = document.getElementById('page6');
         const page7 = document.getElementById('page7');
-        const page8 = document.getElementById('page8'); // Halaman baru
+        const page8 = document.getElementById('page8');
 
         // ====== Tombol Navigasi Tiap Halaman ======
         const lihat  = document.getElementById('lihat');
@@ -662,7 +837,7 @@
         const toPage5 = document.getElementById('toPage5');
         const toPage6 = document.getElementById('toPage6');
         const toPage7 = document.getElementById('toPage7');
-        const toPage8 = document.getElementById('toPage8'); // Tombol ke halaman baru
+        const toPage8 = document.getElementById('toPage8');
 
         const back1 = document.getElementById('back1');
         const back2 = document.getElementById('back2');
@@ -670,7 +845,7 @@
         const back4 = document.getElementById('back4');
         const back5 = document.getElementById('back5');
         const back6 = document.getElementById('back6');
-        const back7 = document.getElementById('back7'); // Tombol kembali dari halaman baru
+        const back7 = document.getElementById('back7');
 
         // ====== Aksi Navigasi Halaman ======
         toPage2.onclick = () => fadeTo(page1, page2);
@@ -679,7 +854,7 @@
         toPage5.onclick = () => fadeTo(page4, page5);
         toPage6.onclick = () => fadeTo(page5, page6);
         toPage7.onclick = () => fadeTo(page6, page7);
-        toPage8.onclick = () => fadeTo(page7, page8); // Navigasi ke halaman baru
+        toPage8.onclick = () => fadeTo(page7, page8);
 
         back1.onclick = () => fadeTo(page2, page1);
         back2.onclick = () => fadeTo(page3, page2);
@@ -687,47 +862,7 @@
         back4.onclick = () => fadeTo(page5, page4);
         back5.onclick = () => fadeTo(page6, page5);
         back6.onclick = () => fadeTo(page7, page6);
-        back7.onclick = () => fadeTo(page8, page7); // Kembali dari halaman baru
-
-        // ====== MUSIK OTOMATIS DIPUTAR ======
-        window.addEventListener('DOMContentLoaded', () => {
-            // Coba putar musik otomatis saat halaman dimuat
-            musik.volume = 0.4;
-            const playPromise = musik.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Musik berhasil diputar
-                    isPlaying = true;
-                    toggle.innerHTML = '<i class="fas fa-music"></i>';
-                }).catch(error => {
-                    // Musik tidak bisa diputar otomatis
-                    console.log("Musik tidak bisa diputar otomatis:", error);
-                    isPlaying = false;
-                    toggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                    
-                    // Tampilkan pesan untuk pengguna
-                    const musicAlert = document.createElement('div');
-                    musicAlert.innerHTML = `
-                        <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); 
-                        background: rgba(255,255,255,0.9); padding: 10px 20px; border-radius: 50px; 
-                        box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 1000; font-size: 0.9rem;
-                        border: 1px solid #ffc2e0;">
-                            <i class="fas fa-music" style="margin-right: 8px; color: #ff66a3;"></i>
-                            Klik tombol musik di pojok kanan bawah untuk memutar musik romantis
-                        </div>
-                    `;
-                    document.body.appendChild(musicAlert);
-                    
-                    // Hapus pesan setelah 5 detik
-                    setTimeout(() => {
-                        if (musicAlert.parentNode) {
-                            musicAlert.parentNode.removeChild(musicAlert);
-                        }
-                    }, 5000);
-                });
-            }
-        });
+        back7.onclick = () => fadeTo(page8, page7);
 
         lihat.onclick = () => {
             intro.style.display = 'none';
