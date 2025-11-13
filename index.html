@@ -392,7 +392,7 @@
     <div class="hearts" id="hearts"></div>
     
     <!-- Halaman 1 -->
-    <div class="container" id="page1">
+    <div class="container" id="page1" style="display:none;">
         <div class="flower-decoration flower-1">
             <i class="fas fa-heart" style="font-size: 80px; color: #ff66a3;"></i>
         </div>
@@ -749,10 +749,8 @@
         const passwordError = document.getElementById('passwordError');
         const correctPassword = "kjiytehe639HHjjksdooooo0000gh";
         
-        // Cek apakah password sudah disimpan di localStorage
-        if (localStorage.getItem('passwordVerified') === 'true') {
-            passwordModal.style.display = 'none';
-        }
+        // SEMUA HALAMAN DIMULAI DENGAN DISPLAY NONE
+        // Modal password akan selalu muncul setiap reload
         
         submitPassword.addEventListener('click', checkPassword);
         passwordInput.addEventListener('keypress', function(e) {
@@ -763,11 +761,14 @@
         
         function checkPassword() {
             if (passwordInput.value === correctPassword) {
-                // Password benar
-                localStorage.setItem('passwordVerified', 'true');
+                // Password benar - tampilkan konten
                 passwordModal.style.opacity = '0';
                 setTimeout(() => {
                     passwordModal.style.display = 'none';
+                    document.getElementById('page1').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('page1').style.opacity = '1';
+                    }, 50);
                 }, 500);
                 
                 // Mulai musik
